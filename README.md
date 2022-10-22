@@ -1,15 +1,15 @@
 # ICT2104-B1-MappingAndNavigation
 
 # Basic idea
-'''bash
-A graph will be used to represent the map. The vertices/nodes will be represented as grids/elements in a matrix.
+'''python
+#A graph will be used to represent the map. The vertices/nodes will be represented as grids/elements in a matrix.
 3 matrix will be used each for tracking edges, barcodes and humps between vertices.
 '''
 # Current Capabilities
 '''bash
 1) Prints a dot format of the total edges, which then can be converted into a graph with this tool: https://graphs.grevian.org/graph (Just copy and paste)
    Example:
-   '''bash
+   '''c
    graph {
 0 -- 1[label="b"];
 0 -- 4;
