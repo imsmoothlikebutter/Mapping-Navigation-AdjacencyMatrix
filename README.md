@@ -1,8 +1,7 @@
 # ICT2104-B1-MappingAndNavigation
 
 # Basic idea
-,,,
-A graph will be used to represent the map. The vertices/nodes will be represented as grids/elements in a matrix.
+,,,A graph will be used to represent the map. The vertices/nodes will be represented as grids/elements in a matrix.
 3 matrix will be used each for tracking edges, barcodes and humps between vertices.
 ,,,
 
