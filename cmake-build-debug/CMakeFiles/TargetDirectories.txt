@@ -1,0 +1,3 @@
+/Users/muhdismaelosman/CLionProjects/graphtest/cmake-build-debug/CMakeFiles/graphtest.dir
+/Users/muhdismaelosman/CLionProjects/graphtest/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/muhdismaelosman/CLionProjects/graphtest/cmake-build-debug/CMakeFiles/rebuild_cache.dir
