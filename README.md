@@ -1,8 +1,8 @@
 # ICT2104-B1-MappingAndNavigation
 
 # Basic idea
-A graph will be used to represent the map. The vertices/nodes will be represented as grids/elements in a matrix. This matrix will be a local var only to be used for printing the 2D map.<br>
-3 matrix will be used each for tracking edges, barcodes and humps between vertices.<br>
+A graph will be used to represent the map. The vertices/nodes will be represented as grids/elements in a (int)matrix. This matrix will be a local var only to be used for printing the 2D map.<br>
+3 (bool*) matrix will be used each for tracking edges, barcodes and humps between vertices.<br>
 
 # Current Capabilities
 1) Prints a dot format of the total edges, which then can be converted into a graph with this tool: https://graphs.grevian.org/graph (Just copy and paste)<br>
