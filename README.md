@@ -1,15 +1,15 @@
 # ICT2104-B1-MappingAndNavigation
 
 # Basic idea
-,,,A graph will be used to represent the map. The vertices/nodes will be represented as grids/elements in a matrix.
+'''bash
+A graph will be used to represent the map. The vertices/nodes will be represented as grids/elements in a matrix.
 3 matrix will be used each for tracking edges, barcodes and humps between vertices.
-,,,
-
-# Current Capabilities
 '''
+# Current Capabilities
+'''bash
 1) Prints a dot format of the total edges, which then can be converted into a graph with this tool: https://graphs.grevian.org/graph (Just copy and paste)
    Example:
-   '''
+   '''bash
    graph {
 0 -- 1[label="b"];
 0 -- 4;
@@ -46,7 +46,7 @@
 14 -- 13;
 15 -- 11;
 }
-,,,
+'''
 
 Converts to:
 ![image](https://user-images.githubusercontent.com/93698724/197350318-d0758162-660f-4b9d-8ea0-16ab3db19f8e.png)
@@ -58,7 +58,7 @@ Converts to:
 
 '''
 # Features yet to be implemented
-'''
+'''bash
 1) No layer to process and use data from line, ultrasonic sensors and accelerometer.
 2) Humps' heights not shown in 2d Map.
 3) No layer to send commands to motor module to control movement for mapping/navigation.
