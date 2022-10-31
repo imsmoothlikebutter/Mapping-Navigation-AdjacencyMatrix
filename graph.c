@@ -1,6 +1,7 @@
 #include "graph.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 
 typedef struct graph{
@@ -8,6 +9,7 @@ typedef struct graph{
     bool** edges;
     bool** barcodes;
     bool** humps;
+    char** directions;
 }graph;
 
 graph* createGraph(int rows,int columns){
@@ -55,6 +57,19 @@ graph* createGraph(int rows,int columns){
                 printf("HumpsMatrix cannot be created(2)");
             }
         }
+        result->directions = calloc(sizeof(char*),result->numOfNodes);
+        if(result->directions == NULL){
+            destroyGraph(result);
+            printf("DirectionsMatrix cannot be created(1)");
+        }
+        //columns
+        for (int i = 0; i < result->numOfNodes; i++){
+            result->directions[i] = calloc(sizeof(char*),result->numOfNodes);
+            if(result->directions[i] == NULL){
+                destroyGraph(result);
+                printf("DirectionsMatrix cannot be created(2)");
+            }
+        }
         //sometimes calloc will not initialized everything to zero, so we 
         //explicitly have to initliase it.
         for (int i = 0; i < result->numOfNodes; i++){
@@ -62,6 +77,7 @@ graph* createGraph(int rows,int columns){
                 result->edges[i][j] = false;
                 result->barcodes[i][j] = false;
                 result->humps[i][j] = false;
+                result->directions[i][j] = 'N';
             }
         }
     }
@@ -101,6 +117,30 @@ void printEdges(graph* graph){
         }
     }
 }
+void printDirections(graph* graph){
+    printf("Directions Matrix:\n");
+    printf("   ");
+    for(int i = 0; i<graph->numOfNodes; i++){
+        if(i == graph->numOfNodes-1){
+            printf("%02d\n", i);
+        }
+        else{
+            printf("%02d ", i);
+        }
+    }
+    for(int i = 0 ; i < graph->numOfNodes; i++){
+        printf("%02d ", i);
+        for(int j = 0; j < graph->numOfNodes; j++){
+            if(j == graph->numOfNodes - 1){
+                printf(" %c\n",graph->directions[i][j]);
+            }
+            else{
+                printf(" %c ",graph->directions[i][j]);
+            }
+        }
+    }
+}
+
 void printBarcodes(graph* graph){
     printf("Barcode Matrix:\n");
     printf("   ");
@@ -146,6 +186,21 @@ void printHumps(graph* graph){
             }
         }
     }
+}
+
+bool addDirection(graph* graph, int from_node, int to_node , char direction, char oppDirection){
+    if(hasDirection(graph, from_node, to_node) != 'N'){
+        return false;
+    }
+    else{
+        graph->directions[from_node][to_node] = direction;
+        graph->directions[to_node][from_node] = oppDirection;
+        printf("Direction Added!\n");
+        return true;
+    }
+}
+char hasDirection(graph* graph, int from_node, int to_node){
+    return graph->directions[from_node][to_node];
 }
 
 bool addEdge(graph* graph, int from_node, int to_node){
