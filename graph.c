@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#define SIZE 40
 
 
 typedef struct graph{
@@ -11,6 +12,83 @@ typedef struct graph{
     bool** humps;
     char** directions;
 }graph;
+
+typedef struct queue {
+    int list[SIZE];
+    int front;
+    int rear;
+};
+
+void createQueue() {
+    struct queue* queue = malloc(sizeof(struct queue));
+    queue->front = -1;
+    queue->rear = -1;
+}
+
+bool queueIsEmpty(struct queue* queue) {
+    if (queue->rear == -1) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool queueIsFull(struct queue* queue) {
+    if (queue->rear == SIZE - 1) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+void enqueue(struct queue* queue, int num) {
+    //check if queue is full
+    if (queueIsFull(queue)) {
+        printf("Queue is full.\n");
+    }
+    else { //if not
+        //increment rear by 1
+        queue->rear++;
+        queue->list[queue->rear] =num;
+        //set front to 0
+        if (queue->front == -1) {
+            queue->front = 0;
+        }
+    }
+}
+
+int dequeue(struct queue* queue) {
+    int removed = -1;
+    //check if is empty
+    if (queueIsEmpty(queue)) {
+        printf("Queue is empty.\n");
+    }
+    else { //if not
+        //dequeue from front
+        removed = queue->list[queue->front];
+        queue->front++;
+        if (queue->front > queue->rear) {
+            queue->front = -1;
+            queue->rear = -1;
+        }
+    }
+    return removed;
+}
+
+
+void BFS(graph* graph, int startingPoint) {
+    int connectedNodes = 0;
+    int visited;
+    for (int from = 0; from < graph->numOfNodes; from++){
+        for (int to = 0; to < graph->numOfNodes; to++){
+            if(graph->edges[from][to]){
+                connectedNodes += 1;
+            }
+        }
+    }
+}
 
 graph* createGraph(int rows,int columns){
     graph* result = malloc(sizeof(graph));

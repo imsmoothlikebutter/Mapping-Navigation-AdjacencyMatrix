@@ -19,6 +19,7 @@ void printBarcodes(graph* graph);
 void printHumps(graph* graph);
 void printGraph(graph* graph);
 void printMap(graph* graph, int rows, int columns);
+void BFS(graph* graph, int startingPoint);
 
 
 

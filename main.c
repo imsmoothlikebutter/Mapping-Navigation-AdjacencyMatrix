@@ -29,6 +29,8 @@ int main(){
     //printing the graph in a grid map format
     printMap(map, ROWS, COLUMNS);
 
+    BFS(map, 10);
+
     //freeing mem
     destroyGraph(map);
     return 0;
