@@ -17,7 +17,7 @@ typedef struct queue {
     int list[SIZE];
     int front;
     int rear;
-};
+}queue;
 
 void createQueue() {
     struct queue* queue = malloc(sizeof(struct queue));
