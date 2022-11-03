@@ -10,7 +10,10 @@ typedef struct graph{
     bool** edges;
     bool** barcodes;
     bool** humps;
-    char** directions;
+    char** directionsWhenNorth;
+    char** directionsWhenSouth;
+    char** directionsWhenWest;
+    char** directionsWhenEast;
 }graph;
 
 typedef struct queue {
@@ -135,17 +138,56 @@ graph* createGraph(int rows,int columns){
                 printf("HumpsMatrix cannot be created(2)");
             }
         }
-        result->directions = calloc(sizeof(char*),result->numOfNodes);
-        if(result->directions == NULL){
+        result->directionsWhenNorth = calloc(sizeof(char*),result->numOfNodes);
+        if(result->directionsWhenNorth == NULL){
             destroyGraph(result);
-            printf("DirectionsMatrix cannot be created(1)");
+            printf("DirectionsWhenNorthMatrix cannot be created(1)");
         }
         //columns
         for (int i = 0; i < result->numOfNodes; i++){
-            result->directions[i] = calloc(sizeof(char*),result->numOfNodes);
-            if(result->directions[i] == NULL){
+            result->directionsWhenNorth[i] = calloc(sizeof(char*),result->numOfNodes);
+            if(result->directionsWhenNorth[i] == NULL){
                 destroyGraph(result);
-                printf("DirectionsMatrix cannot be created(2)");
+                printf("DirectionsWhenNorthMatrix cannot be created(2)");
+            }
+        }
+        result->directionsWhenSouth = calloc(sizeof(char*),result->numOfNodes);
+        if(result->directionsWhenSouth == NULL){
+            destroyGraph(result);
+            printf("DirectionsWhenSouthMatrix cannot be created(1)");
+        }
+        //columns
+        for (int i = 0; i < result->numOfNodes; i++){
+            result->directionsWhenSouth[i] = calloc(sizeof(char*),result->numOfNodes);
+            if(result->directionsWhenSouth[i] == NULL){
+                destroyGraph(result);
+                printf("DirectionsWhenSouthMatrix cannot be created(2)");
+            }
+        }
+        result->directionsWhenWest = calloc(sizeof(char*),result->numOfNodes);
+        if(result->directionsWhenWest == NULL){
+            destroyGraph(result);
+            printf("DirectionsWhenWestMatrix cannot be created(1)");
+        }
+        //columns
+        for (int i = 0; i < result->numOfNodes; i++){
+            result->directionsWhenWest[i] = calloc(sizeof(char*),result->numOfNodes);
+            if(result->directionsWhenWest[i] == NULL){
+                destroyGraph(result);
+                printf("DirectionsWhenWestMatrix cannot be created(2)");
+            }
+        }
+        result->directionsWhenEast = calloc(sizeof(char*),result->numOfNodes);
+        if(result->directionsWhenEast == NULL){
+            destroyGraph(result);
+            printf("DirectionsWhenEastMatrix cannot be created(1)");
+        }
+        //columns
+        for (int i = 0; i < result->numOfNodes; i++){
+            result->directionsWhenEast[i] = calloc(sizeof(char*),result->numOfNodes);
+            if(result->directionsWhenEast[i] == NULL){
+                destroyGraph(result);
+                printf("DirectionsWhenEastMatrix cannot be created(2)");
             }
         }
         //sometimes calloc will not initialized everything to zero, so we 
@@ -155,7 +197,10 @@ graph* createGraph(int rows,int columns){
                 result->edges[i][j] = false;
                 result->barcodes[i][j] = false;
                 result->humps[i][j] = false;
-                result->directions[i][j] = 'N';
+                result->directionsWhenNorth[i][j] = 'N';
+                result->directionsWhenSouth[i][j] = 'N';
+                result->directionsWhenWest[i][j] = 'N';
+                result->directionsWhenEast[i][j] = 'N';
             }
         }
     }
@@ -195,8 +240,8 @@ void printEdges(graph* graph){
         }
     }
 }
-void printDirections(graph* graph){
-    printf("Directions Matrix:\n");
+void printDirectionsWhenNorth(graph* graph){
+    printf("DirectionsWhenNorth Matrix:\n");
     printf("   ");
     for(int i = 0; i<graph->numOfNodes; i++){
         if(i == graph->numOfNodes-1){
@@ -210,10 +255,82 @@ void printDirections(graph* graph){
         printf("%02d ", i);
         for(int j = 0; j < graph->numOfNodes; j++){
             if(j == graph->numOfNodes - 1){
-                printf(" %c\n",graph->directions[i][j]);
+                printf(" %c\n",graph->directionsWhenNorth[i][j]);
             }
             else{
-                printf(" %c ",graph->directions[i][j]);
+                printf(" %c ",graph->directionsWhenNorth[i][j]);
+            }
+        }
+    }
+}
+
+void printDirectionsWhenSouth(graph* graph){
+    printf("DirectionsWhenSouth Matrix:\n");
+    printf("   ");
+    for(int i = 0; i<graph->numOfNodes; i++){
+        if(i == graph->numOfNodes-1){
+            printf("%02d\n", i);
+        }
+        else{
+            printf("%02d ", i);
+        }
+    }
+    for(int i = 0 ; i < graph->numOfNodes; i++){
+        printf("%02d ", i);
+        for(int j = 0; j < graph->numOfNodes; j++){
+            if(j == graph->numOfNodes - 1){
+                printf(" %c\n",graph->directionsWhenSouth[i][j]);
+            }
+            else{
+                printf(" %c ",graph->directionsWhenSouth[i][j]);
+            }
+        }
+    }
+}
+
+void printDirectionsWhenWest(graph* graph){
+    printf("DirectionsWhenWest Matrix:\n");
+    printf("   ");
+    for(int i = 0; i<graph->numOfNodes; i++){
+        if(i == graph->numOfNodes-1){
+            printf("%02d\n", i);
+        }
+        else{
+            printf("%02d ", i);
+        }
+    }
+    for(int i = 0 ; i < graph->numOfNodes; i++){
+        printf("%02d ", i);
+        for(int j = 0; j < graph->numOfNodes; j++){
+            if(j == graph->numOfNodes - 1){
+                printf(" %c\n",graph->directionsWhenWest[i][j]);
+            }
+            else{
+                printf(" %c ",graph->directionsWhenWest[i][j]);
+            }
+        }
+    }
+}
+
+void printDirectionsWhenEast(graph* graph){
+    printf("DirectionsWhenEast Matrix:\n");
+    printf("   ");
+    for(int i = 0; i<graph->numOfNodes; i++){
+        if(i == graph->numOfNodes-1){
+            printf("%02d\n", i);
+        }
+        else{
+            printf("%02d ", i);
+        }
+    }
+    for(int i = 0 ; i < graph->numOfNodes; i++){
+        printf("%02d ", i);
+        for(int j = 0; j < graph->numOfNodes; j++){
+            if(j == graph->numOfNodes - 1){
+                printf(" %c\n",graph->directionsWhenEast[i][j]);
+            }
+            else{
+                printf(" %c ",graph->directionsWhenEast[i][j]);
             }
         }
     }
@@ -266,19 +383,222 @@ void printHumps(graph* graph){
     }
 }
 
-bool addDirection(graph* graph, int from_node, int to_node , char direction, char oppDirection){
-    if(hasDirection(graph, from_node, to_node) != 'N'){
+bool addDirection(graph* graph, int from_node, int to_node, char direction, char orientation){
+    if(hasDirectionNorth(graph, from_node, to_node)!='N' && hasDirectionSouth(graph, from_node, to_node)!='N' 
+    && hasDirectionWest(graph, from_node, to_node)!='N' && hasDirectionEast(graph, from_node, to_node)!='N'){
         return false;
     }
     else{
-        graph->directions[from_node][to_node] = direction;
-        graph->directions[to_node][from_node] = oppDirection;
+        if(orientation == 'N'){
+            if(direction == 'F'){
+                addDirectionNorth(graph, from_node, to_node, direction);
+                addDirectionSouth(graph, from_node,to_node, 'B');
+                addDirectionWest(graph, from_node,to_node,'R');
+                addDirectionEast(graph,from_node,to_node,'L');
+            }
+            else if(direction == 'B'){
+                addDirectionNorth(graph, from_node, to_node, direction);
+                addDirectionSouth(graph, from_node,to_node, 'F');
+                addDirectionWest(graph, from_node,to_node,'L');
+                addDirectionEast(graph,from_node,to_node,'R');
+            }
+            else if(direction == 'L'){
+                addDirectionNorth(graph, from_node, to_node, direction);
+                addDirectionSouth(graph, from_node,to_node, 'R');
+                addDirectionWest(graph, from_node,to_node,'F');
+                addDirectionEast(graph,from_node,to_node,'B');
+            }
+            else if(direction == 'R'){
+                addDirectionNorth(graph, from_node, to_node, direction);
+                addDirectionSouth(graph, from_node,to_node, 'L');
+                addDirectionWest(graph, from_node,to_node,'B');
+                addDirectionEast(graph,from_node,to_node,'F');
+            }   
+        }
+        else if(orientation == 'S'){
+            if(direction == 'F'){
+                addDirectionSouth(graph, from_node, to_node,direction);
+                addDirectionNorth(graph,from_node,to_node, 'B');
+                addDirectionWest(graph, from_node, to_node,'L');
+                addDirectionEast(graph,from_node,to_node,'R');
+            }
+            else if(direction == 'B'){
+                addDirectionSouth(graph, from_node, to_node,direction);
+                addDirectionNorth(graph,from_node,to_node, 'F');
+                addDirectionWest(graph, from_node, to_node,'R');
+                addDirectionEast(graph,from_node,to_node,'L');
+            }
+            else if(direction == 'L'){
+                addDirectionSouth(graph, from_node, to_node,direction);
+                addDirectionNorth(graph,from_node,to_node, 'R');
+                addDirectionWest(graph, from_node, to_node,'B');
+                addDirectionEast(graph,from_node,to_node,'F');
+            }
+            else if(direction == 'R'){
+                addDirectionSouth(graph, from_node, to_node,direction);
+                addDirectionNorth(graph,from_node,to_node, 'L');
+                addDirectionWest(graph, from_node, to_node,'F');
+                addDirectionEast(graph,from_node,to_node,'B');
+            }
+        }
+        else if(orientation == 'W'){
+            if(direction == 'F'){
+                addDirectionWest(graph,from_node,to_node,direction);
+                addDirectionNorth(graph,from_node,to_node,'L');
+                addDirectionSouth(graph,from_node,to_node, 'R');
+                addDirectionEast(graph, from_node,to_node, 'B');
+            }
+            else if(direction == 'B'){
+                addDirectionWest(graph,from_node,to_node,direction);
+                addDirectionNorth(graph,from_node,to_node,'R');
+                addDirectionSouth(graph,from_node,to_node, 'L');
+                addDirectionEast(graph, from_node,to_node, 'F');
+            }
+            else if(direction == 'L'){
+                addDirectionWest(graph,from_node,to_node,direction);
+                addDirectionNorth(graph,from_node,to_node,'B');
+                addDirectionSouth(graph,from_node,to_node, 'F');
+                addDirectionEast(graph, from_node,to_node, 'R');
+            }
+            else if(direction == 'R'){
+                addDirectionWest(graph,from_node,to_node,direction);
+                addDirectionNorth(graph,from_node,to_node,'F');
+                addDirectionSouth(graph,from_node,to_node, 'B');
+                addDirectionEast(graph, from_node,to_node, 'L');
+            }
+        }
+        else if(orientation == 'E'){
+            if(direction == 'F'){
+                addDirectionEast(graph,from_node,to_node,direction);
+                addDirectionNorth(graph, from_node,to_node,'R');
+                addDirectionSouth(graph,from_node, to_node,'L');
+                addDirectionWest(graph,from_node,to_node,'B');
+            }
+            else if(direction == 'B'){
+                addDirectionEast(graph,from_node,to_node,direction);
+                addDirectionNorth(graph, from_node,to_node,'L');
+                addDirectionSouth(graph,from_node, to_node,'R');
+                addDirectionWest(graph,from_node,to_node,'F');
+            }
+            else if(direction == 'L'){
+                addDirectionEast(graph,from_node,to_node,direction);
+                addDirectionNorth(graph, from_node,to_node,'F');
+                addDirectionSouth(graph,from_node, to_node,'B');
+                addDirectionWest(graph,from_node,to_node,'R');
+            }
+            else if(direction == 'R'){
+                addDirectionEast(graph,from_node,to_node,direction);
+                addDirectionNorth(graph, from_node,to_node,'B');
+                addDirectionSouth(graph,from_node, to_node,'F');
+                addDirectionWest(graph,from_node,to_node,'L');
+            }
+        }
+        return true;
+    }
+}
+
+bool addDirectionNorth(graph* graph, int from_node, int to_node , char direction){
+    if(hasDirectionNorth(graph, from_node, to_node) != 'N'){
+        return false;
+    }
+    else{
+        graph->directionsWhenNorth[from_node][to_node] = direction;
+        if(direction == 'F'){
+            graph->directionsWhenNorth[to_node][from_node] = 'B';
+        }
+        else if(direction == 'B'){
+            graph->directionsWhenNorth[to_node][from_node] = 'F';
+        }
+        else if(direction == 'L'){
+            graph->directionsWhenNorth[to_node][from_node] = 'R';
+        }
+        else if(direction == 'R'){
+            graph->directionsWhenNorth[to_node][from_node] = 'L';
+        }
         printf("Direction Added!\n");
         return true;
     }
 }
-char hasDirection(graph* graph, int from_node, int to_node){
-    return graph->directions[from_node][to_node];
+char hasDirectionNorth(graph* graph, int from_node, int to_node){
+    return graph->directionsWhenNorth[from_node][to_node];
+}
+
+bool addDirectionSouth(graph* graph, int from_node, int to_node , char direction){
+    if(hasDirectionSouth(graph, from_node, to_node) != 'N'){
+        return false;
+    }
+    else{
+        graph->directionsWhenSouth[from_node][to_node] = direction;
+        if(direction == 'F'){
+            graph->directionsWhenSouth[to_node][from_node] = 'B';
+        }
+        else if(direction == 'B'){
+            graph->directionsWhenSouth[to_node][from_node] = 'F';
+        }
+        else if(direction == 'L'){
+            graph->directionsWhenSouth[to_node][from_node] = 'R';
+        }
+        else if(direction == 'R'){
+            graph->directionsWhenSouth[to_node][from_node] = 'L';
+        }
+        printf("Direction Added!\n");
+        return true;
+    }
+}
+char hasDirectionSouth(graph* graph, int from_node, int to_node){
+    return graph->directionsWhenSouth[from_node][to_node];
+}
+
+bool addDirectionWest(graph* graph, int from_node, int to_node , char direction){
+    if(hasDirectionWest(graph, from_node, to_node) != 'N'){
+        return false;
+    }
+    else{
+        graph->directionsWhenWest[from_node][to_node] = direction;
+        if(direction == 'F'){
+            graph->directionsWhenWest[to_node][from_node] = 'B';
+        }
+        else if(direction == 'B'){
+            graph->directionsWhenWest[to_node][from_node] = 'F';
+        }
+        else if(direction == 'L'){
+            graph->directionsWhenWest[to_node][from_node] = 'R';
+        }
+        else if(direction == 'R'){
+            graph->directionsWhenWest[to_node][from_node] = 'L';
+        }
+        printf("Direction Added!\n");
+        return true;
+    }
+}
+char hasDirectionWest(graph* graph, int from_node, int to_node){
+    return graph->directionsWhenWest[from_node][to_node];
+}
+
+bool addDirectionEast(graph* graph, int from_node, int to_node , char direction){
+    if(hasDirectionEast(graph, from_node, to_node) != 'N'){
+        return false;
+    }
+    else{
+        graph->directionsWhenEast[from_node][to_node] = direction;
+        if(direction == 'F'){
+            graph->directionsWhenEast[to_node][from_node] = 'B';
+        }
+        else if(direction == 'B'){
+            graph->directionsWhenEast[to_node][from_node] = 'F';
+        }
+        else if(direction == 'L'){
+            graph->directionsWhenEast[to_node][from_node] = 'R';
+        }
+        else if(direction == 'R'){
+            graph->directionsWhenEast[to_node][from_node] = 'L';
+        }
+        printf("Direction Added!\n");
+        return true;
+    }
+}
+char hasDirectionEast(graph* graph, int from_node, int to_node){
+    return graph->directionsWhenEast[from_node][to_node];
 }
 
 bool addEdge(graph* graph, int from_node, int to_node){
@@ -415,4 +735,43 @@ void printMap(graph* graph, int rows, int columns){
             }
         }
     }
+}
+
+void printAllMatrix(graph* graph){
+    printEdges(graph);
+    printHumps(graph);
+    printBarcodes(graph);
+    printDirectionsWhenNorth(graph);
+    printDirectionsWhenSouth(graph);
+    printDirectionsWhenWest(graph);
+    printDirectionsWhenEast(graph);
+}
+
+void whatDirectionDoITake(graph* graph, int from_node, int to_node){
+    printf("From grid %d to %d\n", from_node, to_node);
+    if(hasDirectionNorth(graph,from_node,to_node)!='N'){
+        printf("If North: Go %c\n",graph->directionsWhenNorth[from_node][to_node]);
+    }
+    else{
+        printf("If North: NULL\n");
+    }
+    if(hasDirectionSouth(graph,from_node,to_node)!='N'){
+        printf("If South: Go %c\n",graph->directionsWhenSouth[from_node][to_node]);
+    }
+    else{
+        printf("If South: NULL\n");
+    }
+    if(hasDirectionWest(graph,from_node,to_node)!='N'){
+        printf("If West: Go %c\n",graph->directionsWhenWest[from_node][to_node]);
+    }
+    else{
+        printf("If West: NULL\n");
+    }
+    if(hasDirectionEast(graph,from_node,to_node)!='N'){
+        printf("If East: Go %c\n",graph->directionsWhenEast[from_node][to_node]);
+    }
+    else{
+        printf("If East: NULL\n");
+    }
+    
 }

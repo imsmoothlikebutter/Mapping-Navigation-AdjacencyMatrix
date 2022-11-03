@@ -12,14 +12,26 @@ bool addBarcode(graph* graph, int from_node, int to_node);
 bool hasBarcode(graph* graph, int from_node, int to_node);
 bool addHump(graph* graph, int from_node, int to_node);
 bool hasHump(graph* graph, int from_node, int to_node);
-bool addDirection(graph* graph, int from_node, int to_node , char direction, char oppDirection);
-char hasDirection(graph* graph, int from_node, int to_node);
-void printDirections(graph* graph);
+bool addDirection(graph* graph, int from_node, int to_node, char direction, char orientation);
+bool addDirectionNorth(graph* graph, int from_node, int to_node , char direction);
+char hasDirectionNorth(graph* graph, int from_node, int to_node);
+bool addDirectionSouth(graph* graph, int from_node, int to_node , char direction);
+char hasDirectionSouth(graph* graph, int from_node, int to_node);
+bool addDirectionWest(graph* graph, int from_node, int to_node , char direction);
+char hasDirectionWest(graph* graph, int from_node, int to_node);
+bool addDirectionEast(graph* graph, int from_node, int to_node , char direction);
+char hasDirectionEast(graph* graph, int from_node, int to_node);
+void whatDirectionDoITake(graph* graph, int from_node, int to_node);
+void printDirectionsWhenNorth(graph* graph);
+void printDirectionsWhenSouth(graph* graph);
+void printDirectionsWhenWest(graph* graph);
+void printDirectionsWhenEast(graph* graph);
 void printBarcodes(graph* graph);
 void printHumps(graph* graph);
 void printGraph(graph* graph);
 void printMap(graph* graph, int rows, int columns);
 void BFS(graph* graph, int startingPoint);
+void printAllMatrix(graph* graph);
 
 
 

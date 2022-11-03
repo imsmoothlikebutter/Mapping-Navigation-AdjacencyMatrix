@@ -1,35 +1,56 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "graph.h"
-#define ROWS 4
-#define COLUMNS 4
+#define ROWS 3
+#define COLUMNS 3
 
 int main(){
-    char up = 'U';
+    char forward = 'F';
     char left = 'L';
     char right = 'R';
-    char down = 'D';
+    char reverse = 'B';
+    char orientation ='N'; //relative compass
+    //whenever car turns left, orientation becomes East
+    //whenever car turns right, orientation becomes West
+    //char* orientationptr = &orientation;
     graph* map = createGraph(ROWS,COLUMNS);
-    addEdge(map, 15,11);
-    addDirection(map,15,11,up,down);
-    addEdge(map, 10,11);
-    addDirection(map,10,11,right,left);
-    addBarcode(map, 15,11);
-    addHump(map, 10,11);
+    //example on a 3x3 map. Start at grid 4
+    //node 4 to 5. right side clear
+    addEdge(map, 4,5);
+    addDirection(map, 4,5,right,orientation);
+    orientation = 'E';
+    addEdge(map,5,8);
+    addDirection(map, 5,8, right, orientation);
+    orientation = 'S';
+    addEdge(map, 8,7);
+    addDirection(map,8,7,right,orientation);
+    orientation = 'W';
+    addEdge(map, 7,6);
+    addDirection(map, 7,6,forward,orientation);
+    addEdge(map, 6,3);
+    addDirection(map, 6,3,right,orientation);
+    orientation = 'N';
+    addEdge(map, 3,0);
+    addDirection(map, 3,0,forward,orientation);
+    addEdge(map,0,1);
+    addDirection(map, 0,1,right,orientation);
+    orientation = 'E';
+    addEdge(map,1,2);
+    addDirection(map,1,2,forward,orientation);
 
-    //printing the 4 different matrices
-    printEdges(map);
-    printDirections(map);
-    printBarcodes(map);
-    printHumps(map);
+    //printing all different matrices
+    printAllMatrix(map);
 
     //printing the graph in dot format
     printGraph(map);
 
     //printing the graph in a grid map format
     printMap(map, ROWS, COLUMNS);
+    printf("Current car orientation: %c\n",orientation);
 
-    BFS(map, 10);
+    whatDirectionDoITake(map, 0,1);
+
+    //BFS(map, 10);
 
     //freeing mem
     destroyGraph(map);
