@@ -17,6 +17,10 @@ typedef struct graph{
     //added for visited and adjacent nodes
     int* visited;
     struct node** adjacentNodes;
+    //Added strct node to store array for DFS
+    struct node** adjLists;
+    int numVertices;
+    int* visit;
 }graph;
 
 //queue struct
@@ -30,6 +34,7 @@ typedef struct queue {
 typedef struct node {
     int nodeNum;
     struct node* next;
+
 }node;
 
 
@@ -101,7 +106,6 @@ struct node* createNode(int n) {
     struct node* node = malloc(sizeof(struct node));
     node->nodeNum = n;
     node->next = NULL;
-
     return node;
 }
 
@@ -145,7 +149,26 @@ void BFS(graph* graph, int startingPoint) {
     for (int i = visitedOrder->front; i < visitedOrder->rear + 1; i++) {
         printf("%d ", visitedOrder->list[i]);
     }
-    printf("\n");
+    printf("\n \n");
+}
+
+//Depth-first search
+void DFS(graph* graph, int vertex) {
+    struct node* adjList = graph->adjLists[vertex];
+    struct node* temp = adjList;
+
+    graph->visit[vertex] = 1;
+    printf("Visited in order of BFS %d \n", vertex);
+
+    while (temp != NULL) {
+        int connectedVertex = temp->nodeNum;
+
+        if (graph->visit[connectedVertex] == 0) {
+            //put into visited
+            DFS(graph, connectedVertex);
+        }
+        temp = temp->next;
+    }
 }
 
 graph* createGraph(int rows,int columns){
@@ -153,10 +176,16 @@ graph* createGraph(int rows,int columns){
     //initialize adjacent nodes and visited using total number of nodes
     result->adjacentNodes = malloc(rows * columns * sizeof(struct node*));
     result->visited = malloc(rows * columns * sizeof(int));
+    //for BFS
+    result->adjLists = malloc(rows * columns * sizeof(struct node*));
+    result->visit = malloc(rows * columns * sizeof(int));
     for (int i = 0; i < rows * columns; i++) {
         //set adjacent nodes to null and visited to 0
         result->adjacentNodes[i] = NULL;
         result->visited[i] = 0;
+
+        result->adjLists[i] = NULL;
+        result->visit[i] = 0;
     }
 
     if(result != NULL){
@@ -678,10 +707,16 @@ bool addEdge(graph* graph, int from_node, int to_node){
         struct node* node = createNode(from_node);
         node->next = graph->adjacentNodes[to_node];
         graph->adjacentNodes[to_node] = node;
+    // for BFS
+        node->next = graph->adjLists[to_node];
+        graph->adjLists[to_node] = node;
 
         node = createNode(to_node);
         node->next = graph->adjacentNodes[from_node];
         graph->adjacentNodes[from_node] = node;
+        //for BFS
+        node->next = graph->adjLists[from_node];
+        graph->adjLists[from_node] = node;
 
         return true;
     }

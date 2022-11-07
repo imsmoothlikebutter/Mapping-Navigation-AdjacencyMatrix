@@ -52,6 +52,8 @@ int main(){
 
     BFS(map, 0);
 
+    DFS(map, 0);
+
     //freeing mem
     destroyGraph(map);
     return 0;

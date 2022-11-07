@@ -52,10 +52,10 @@ RM = "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "C:\Users\zoe\SIT\Y2 tri 1\2104\ICT2104-B1-MappingAndNavigation"
+CMAKE_SOURCE_DIR = C:\Users\v_vis\CLionProjects\ICT2104-B1-MappingAndNavigation
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "C:\Users\zoe\SIT\Y2 tri 1\2104\ICT2104-B1-MappingAndNavigation\cmake-build-debug"
+CMAKE_BINARY_DIR = C:\Users\v_vis\CLionProjects\ICT2104-B1-MappingAndNavigation\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/depend.make
@@ -72,31 +72,31 @@ CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/graph.c.obj: CMakeFiles/ICT2104_B
 CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/graph.c.obj: CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/includes_C.rsp
 CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/graph.c.obj: ../graph.c
 CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/graph.c.obj: CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\zoe\SIT\Y2 tri 1\2104\ICT2104-B1-MappingAndNavigation\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/graph.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/graph.c.obj -MF CMakeFiles\ICT2104_B1_MappingAndNavigation.dir\graph.c.obj.d -o CMakeFiles\ICT2104_B1_MappingAndNavigation.dir\graph.c.obj -c "C:\Users\zoe\SIT\Y2 tri 1\2104\ICT2104-B1-MappingAndNavigation\graph.c"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\v_vis\CLionProjects\ICT2104-B1-MappingAndNavigation\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/graph.c.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/graph.c.obj -MF CMakeFiles\ICT2104_B1_MappingAndNavigation.dir\graph.c.obj.d -o CMakeFiles\ICT2104_B1_MappingAndNavigation.dir\graph.c.obj -c C:\Users\v_vis\CLionProjects\ICT2104-B1-MappingAndNavigation\graph.c
 
 CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/graph.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/graph.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "C:\Users\zoe\SIT\Y2 tri 1\2104\ICT2104-B1-MappingAndNavigation\graph.c" > CMakeFiles\ICT2104_B1_MappingAndNavigation.dir\graph.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\v_vis\CLionProjects\ICT2104-B1-MappingAndNavigation\graph.c > CMakeFiles\ICT2104_B1_MappingAndNavigation.dir\graph.c.i
 
 CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/graph.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/graph.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "C:\Users\zoe\SIT\Y2 tri 1\2104\ICT2104-B1-MappingAndNavigation\graph.c" -o CMakeFiles\ICT2104_B1_MappingAndNavigation.dir\graph.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\v_vis\CLionProjects\ICT2104-B1-MappingAndNavigation\graph.c -o CMakeFiles\ICT2104_B1_MappingAndNavigation.dir\graph.c.s
 
 CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/main.c.obj: CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/flags.make
 CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/main.c.obj: CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/includes_C.rsp
 CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/main.c.obj: ../main.c
 CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/main.c.obj: CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\zoe\SIT\Y2 tri 1\2104\ICT2104-B1-MappingAndNavigation\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/main.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/main.c.obj -MF CMakeFiles\ICT2104_B1_MappingAndNavigation.dir\main.c.obj.d -o CMakeFiles\ICT2104_B1_MappingAndNavigation.dir\main.c.obj -c "C:\Users\zoe\SIT\Y2 tri 1\2104\ICT2104-B1-MappingAndNavigation\main.c"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\v_vis\CLionProjects\ICT2104-B1-MappingAndNavigation\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/main.c.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/main.c.obj -MF CMakeFiles\ICT2104_B1_MappingAndNavigation.dir\main.c.obj.d -o CMakeFiles\ICT2104_B1_MappingAndNavigation.dir\main.c.obj -c C:\Users\v_vis\CLionProjects\ICT2104-B1-MappingAndNavigation\main.c
 
 CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/main.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "C:\Users\zoe\SIT\Y2 tri 1\2104\ICT2104-B1-MappingAndNavigation\main.c" > CMakeFiles\ICT2104_B1_MappingAndNavigation.dir\main.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\v_vis\CLionProjects\ICT2104-B1-MappingAndNavigation\main.c > CMakeFiles\ICT2104_B1_MappingAndNavigation.dir\main.c.i
 
 CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/main.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "C:\Users\zoe\SIT\Y2 tri 1\2104\ICT2104-B1-MappingAndNavigation\main.c" -o CMakeFiles\ICT2104_B1_MappingAndNavigation.dir\main.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\v_vis\CLionProjects\ICT2104-B1-MappingAndNavigation\main.c -o CMakeFiles\ICT2104_B1_MappingAndNavigation.dir\main.c.s
 
 # Object files for target ICT2104_B1_MappingAndNavigation
 ICT2104_B1_MappingAndNavigation_OBJECTS = \
@@ -112,7 +112,7 @@ ICT2104_B1_MappingAndNavigation.exe: CMakeFiles/ICT2104_B1_MappingAndNavigation.
 ICT2104_B1_MappingAndNavigation.exe: CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/linklibs.rsp
 ICT2104_B1_MappingAndNavigation.exe: CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/objects1.rsp
 ICT2104_B1_MappingAndNavigation.exe: CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Users\zoe\SIT\Y2 tri 1\2104\ICT2104-B1-MappingAndNavigation\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable ICT2104_B1_MappingAndNavigation.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\v_vis\CLionProjects\ICT2104-B1-MappingAndNavigation\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable ICT2104_B1_MappingAndNavigation.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\ICT2104_B1_MappingAndNavigation.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -124,6 +124,6 @@ CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/clean:
 .PHONY : CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/clean
 
 CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "C:\Users\zoe\SIT\Y2 tri 1\2104\ICT2104-B1-MappingAndNavigation" "C:\Users\zoe\SIT\Y2 tri 1\2104\ICT2104-B1-MappingAndNavigation" "C:\Users\zoe\SIT\Y2 tri 1\2104\ICT2104-B1-MappingAndNavigation\cmake-build-debug" "C:\Users\zoe\SIT\Y2 tri 1\2104\ICT2104-B1-MappingAndNavigation\cmake-build-debug" "C:\Users\zoe\SIT\Y2 tri 1\2104\ICT2104-B1-MappingAndNavigation\cmake-build-debug\CMakeFiles\ICT2104_B1_MappingAndNavigation.dir\DependInfo.cmake" --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\v_vis\CLionProjects\ICT2104-B1-MappingAndNavigation C:\Users\v_vis\CLionProjects\ICT2104-B1-MappingAndNavigation C:\Users\v_vis\CLionProjects\ICT2104-B1-MappingAndNavigation\cmake-build-debug C:\Users\v_vis\CLionProjects\ICT2104-B1-MappingAndNavigation\cmake-build-debug C:\Users\v_vis\CLionProjects\ICT2104-B1-MappingAndNavigation\cmake-build-debug\CMakeFiles\ICT2104_B1_MappingAndNavigation.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/depend
 
