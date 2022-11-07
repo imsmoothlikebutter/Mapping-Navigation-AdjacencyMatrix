@@ -50,7 +50,7 @@ int main(){
 
     whatDirectionDoITake(map, 0,1);
 
-    //BFS(map, 10);
+    BFS(map, 0);
 
     //freeing mem
     destroyGraph(map);

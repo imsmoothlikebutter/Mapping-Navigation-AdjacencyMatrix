@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/user/SIT/Y2 tri 1/2104/proj/ICT2104-B1-MappingAndNavigation
+# Install script for directory: C:/Users/zoe/SIT/Y2 tri 1/2104/ICT2104-B1-MappingAndNavigation
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/user/SIT/Y2 tri 1/2104/proj/ICT2104-B1-MappingAndNavigation/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/zoe/SIT/Y2 tri 1/2104/ICT2104-B1-MappingAndNavigation/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

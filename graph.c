@@ -14,18 +14,32 @@ typedef struct graph{
     char** directionsWhenSouth;
     char** directionsWhenWest;
     char** directionsWhenEast;
+    //added for visited and adjacent nodes
+    int* visited;
+    struct node** adjacentNodes;
 }graph;
 
+//queue struct
 typedef struct queue {
     int list[SIZE];
     int front;
     int rear;
 }queue;
 
-void createQueue() {
+//node struct
+typedef struct node {
+    int nodeNum;
+    struct node* next;
+}node;
+
+
+//queue methods
+struct queue* createQueue() {
     struct queue* queue = malloc(sizeof(struct queue));
     queue->front = -1;
     queue->rear = -1;
+
+    return queue;
 }
 
 bool queueIsEmpty(struct queue* queue) {
@@ -63,10 +77,11 @@ void enqueue(struct queue* queue, int num) {
 }
 
 int dequeue(struct queue* queue) {
-    int removed = -1;
+    int removed;
     //check if is empty
     if (queueIsEmpty(queue)) {
         printf("Queue is empty.\n");
+        removed = -1;
     }
     else { //if not
         //dequeue from front
@@ -77,24 +92,73 @@ int dequeue(struct queue* queue) {
             queue->rear = -1;
         }
     }
+
     return removed;
 }
 
+//create node method
+struct node* createNode(int n) {
+    struct node* node = malloc(sizeof(struct node));
+    node->nodeNum = n;
+    node->next = NULL;
 
+    return node;
+}
+
+//breadth-first search
 void BFS(graph* graph, int startingPoint) {
-    int connectedNodes = 0;
-    int visited;
-    for (int from = 0; from < graph->numOfNodes; from++){
-        for (int to = 0; to < graph->numOfNodes; to++){
-            if(graph->edges[from][to]){
-                connectedNodes += 1;
+    //create queue for all nodes
+    struct queue* nodesList = createQueue();
+    //create queue to store order to print at the end
+    struct queue* visitedOrder = createQueue();
+
+    //mark starting point as visited
+    graph->visited[startingPoint] = 1;
+    enqueue(nodesList, startingPoint);
+
+    printf("\n");
+
+    //while nodes queue has items
+    while (!queueIsEmpty(nodesList)) {
+        int currentNode = dequeue(nodesList);
+        printf("Visited node: %d\n", currentNode);
+        //add current node into visitedOrder list
+        enqueue(visitedOrder, currentNode);
+
+        //get adjacent nodes of currentNode
+        //while there are adjacent nodes for currentNode
+        while (graph->adjacentNodes[currentNode]) {
+            //if current node number has not been visited yet
+            if (graph->visited[graph->adjacentNodes[currentNode]->nodeNum] == 0) {
+                //put into visited
+                graph->visited[graph->adjacentNodes[currentNode]->nodeNum] = 1;
+                //put adjacent nodes from current node into nodes queue
+                enqueue(nodesList, graph->adjacentNodes[currentNode]->nodeNum);
             }
+            //go to the next node
+            graph->adjacentNodes[currentNode] = graph->adjacentNodes[currentNode]->next;
         }
+
     }
+
+    printf("\nNodes visited in order: ");
+    for (int i = visitedOrder->front; i < visitedOrder->rear + 1; i++) {
+        printf("%d ", visitedOrder->list[i]);
+    }
+    printf("\n");
 }
 
 graph* createGraph(int rows,int columns){
     graph* result = malloc(sizeof(graph));
+    //initialize adjacent nodes and visited using total number of nodes
+    result->adjacentNodes = malloc(rows * columns * sizeof(struct node*));
+    result->visited = malloc(rows * columns * sizeof(int));
+    for (int i = 0; i < rows * columns; i++) {
+        //set adjacent nodes to null and visited to 0
+        result->adjacentNodes[i] = NULL;
+        result->visited[i] = 0;
+    }
+
     if(result != NULL){
         result->numOfNodes = rows*columns;
         //allocate mem for EdgesMatrix
@@ -609,6 +673,16 @@ bool addEdge(graph* graph, int from_node, int to_node){
         graph->edges[from_node][to_node] = true;
         graph->edges[to_node][from_node] = true;
         printf("Edge Added!\n");
+
+        //adding for nodes
+        struct node* node = createNode(from_node);
+        node->next = graph->adjacentNodes[to_node];
+        graph->adjacentNodes[to_node] = node;
+
+        node = createNode(to_node);
+        node->next = graph->adjacentNodes[from_node];
+        graph->adjacentNodes[from_node] = node;
+
         return true;
     }
 }
