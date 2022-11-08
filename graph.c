@@ -158,7 +158,7 @@ void DFS(graph* graph, int vertex) {
     struct node* temp = adjList;
 
     graph->visit[vertex] = 1;
-    printf("Visited in order of BFS %d \n", vertex);
+    printf("Visited in order of DFS %d \n", vertex);
 
     while (temp != NULL) {
         int connectedVertex = temp->nodeNum;
@@ -883,4 +883,29 @@ void whatDirectionDoITake(graph* graph, int from_node, int to_node){
         printf("If East: NULL\n");
     }
     
+}
+
+bool checkAllNodesHasAtLeast1Edge(graph* graph){
+    int counter = 0;
+    for(int i = 0; i < graph->numOfNodes; i++){
+        int counter2 =0;
+        for(int j =0; j< graph->numOfNodes; j++){
+            if(graph->edges[i][j] == true){
+                counter2 += 1;
+            }
+            if(j == graph->numOfNodes-1 && counter2 != 0){
+                counter += 1;
+            }
+        }
+        //printf("Node %d has %d edges.\n",i,counter2);
+    }
+    //printf("Counter: %d\n",counter);
+    if(counter == graph->numOfNodes){
+        printf("All Nodes have at least 1 edge!\n");
+        return true;
+    }
+    else{
+        printf("Some nodes don't have an edge!\n");
+        return false;
+    }
 }

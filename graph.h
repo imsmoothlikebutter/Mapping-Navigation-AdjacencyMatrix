@@ -33,6 +33,8 @@ void printMap(graph* graph, int rows, int columns);
 void BFS(graph* graph, int startingPoint);
 void DFS(graph* graph, int nodeNum);
 void printAllMatrix(graph* graph);
+bool checkAllNodesHasAtLeast1Edge(graph* graph);
+
 
 
 
