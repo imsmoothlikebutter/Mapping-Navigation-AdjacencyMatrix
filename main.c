@@ -51,7 +51,7 @@ int main(){
     whatDirectionDoITake(map, 0,1);
 
     printf("BFS Algo: \n");
-    BFS(map, 0);
+    BFS(map, 0, 6);
 
     printf("DFS Algo: \n");
     DFS(map, 0);

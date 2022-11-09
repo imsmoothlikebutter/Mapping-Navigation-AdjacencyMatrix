@@ -110,24 +110,30 @@ struct node* createNode(int n) {
 }
 
 //breadth-first search
-void BFS(graph* graph, int startingPoint) {
+void BFS(graph* graph, int startingPoint, int endingPoint) {
     //create queue for all nodes
     struct queue* nodesList = createQueue();
     //create queue to store order to print at the end
     struct queue* visitedOrder = createQueue();
 
+    int found = 0;
+
     //mark starting point as visited
     graph->visited[startingPoint] = 1;
     enqueue(nodesList, startingPoint);
 
-    printf("\n");
-
     //while nodes queue has items
     while (!queueIsEmpty(nodesList)) {
         int currentNode = dequeue(nodesList);
+
         printf("Visited node: %d\n", currentNode);
         //add current node into visitedOrder list
         enqueue(visitedOrder, currentNode);
+
+        if (currentNode == endingPoint) {
+            found = 1;
+            break;
+        }
 
         //get adjacent nodes of currentNode
         //while there are adjacent nodes for currentNode
@@ -145,10 +151,19 @@ void BFS(graph* graph, int startingPoint) {
 
     }
 
-    printf("\nNodes visited in order: ");
-    for (int i = visitedOrder->front; i < visitedOrder->rear + 1; i++) {
-        printf("%d ", visitedOrder->list[i]);
+    if (found == 1) {
+        printf("Destination node %d found!", endingPoint);
+        printf("\nNodes visited in order: ");
+        for (int i = visitedOrder->front; i < visitedOrder->rear + 1; i++) {
+            printf("%d ", visitedOrder->list[i]);
+        }
     }
+    else {
+        printf("Destination node %d not found!", endingPoint);
+    }
+
+
+    
     printf("\n \n");
 }
 

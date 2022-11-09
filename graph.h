@@ -30,7 +30,7 @@ void printBarcodes(graph* graph);
 void printHumps(graph* graph);
 void printGraph(graph* graph);
 void printMap(graph* graph, int rows, int columns);
-void BFS(graph* graph, int startingPoint);
+void BFS(graph* graph, int startingPoint, int endingPoint);
 void DFS(graph* graph, int nodeNum);
 void printAllMatrix(graph* graph);
 bool checkAllNodesHasAtLeast1Edge(graph* graph);
