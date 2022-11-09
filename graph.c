@@ -3,7 +3,9 @@
 #include <stdio.h>
 #include <string.h>
 #define SIZE 40
-
+#define ROWS 4
+#define COLUMNS 4
+#define V (ROWS * COLUMNS)
 
 typedef struct graph{
     int numOfNodes;
@@ -169,6 +171,120 @@ void DFS(graph* graph, int vertex) {
         }
         temp = temp->next;
     }
+}
+
+
+// Help function to find the node with the shortest distance, from the set of nodes not included in the shortest path tree set
+int dijkstraMinDistance(int shortestDistance[], bool shortestSpanTreeSet[]) {
+    // Initialise minimum value
+    int min = INT_MAX, min_index;
+    for (int v = 0; v < V; v++) {
+        if (shortestSpanTreeSet[v] == false && shortestDistance[v] <= min) {
+            min = shortestDistance[v], min_index = v;
+        }
+    }
+    return min_index;
+}
+
+
+// Function to print shortest path from source to j using parent array
+void printRouteOfShortestPath(int parent[], int j, int routeTaken[], int pos) {
+    // Terminate if base case: j == src
+    if (parent[j] == -1 ) {
+        return;
+    }
+
+    // "Push' to routeTaken array. This array returns the steps taken by algo to traverse from src node to dest node
+    pos--;
+    routeTaken[pos] = j;
+
+    // Recursive Call
+    printRouteOfShortestPath(parent, parent[j], routeTaken, pos);
+
+    printf("%d ", j);
+}
+
+// A helper function to print the shortestDistance array.
+// This function also returns an array (routeTaken[]) which holds the all the nodes
+// traversed in the algorithm (inclusive of start node and end node)
+int printDijkstraSolution(int shortestDistance[], int parent[], int src, int dest) {
+    // routeTaken array holds the nodes traversed from start to end
+    int routeTaken[shortestDistance[dest] + 1];
+    int pos = shortestDistance[dest] + 1;
+    routeTaken[0] = src; // First element is start node
+
+    // Printing out the vertex, distance, path taken to traverse from src node to dest node
+    printf("Vertex\t  Distance\tPath");
+    for (int i = 0; i < V; i++) {
+        // Print only for shortest path
+        if (i == dest) {
+            printf("\n%d -> %d \t\t %d\t\t%d ", src, i, shortestDistance[i], src);
+            printRouteOfShortestPath(parent, i, routeTaken, pos);
+        }
+
+    }
+
+    routeTaken[pos-1] = dest; // Last element is end node
+
+    // Print out the routes of the shortest path for checking
+    printf("\nRoutes are:\n");
+    for (int i = 0; i <= shortestDistance[dest]; i++) {
+        printf("%d ", routeTaken[i]);
+    }
+    printf("\n");
+
+    return routeTaken;
+}
+
+// Function that implements Dijkstra's algorithm on a graph represented using adjacency matrix
+void dijkstraTraversal(graph* graph, int src, int dest) {
+    // shortestDistance[i] holds the shortest distance from src to i
+    int shortestDistance[V];
+
+    // shortestSpanTreeSet[i] == true if node i is included in the shortestSpanTreeSet
+    // or shortest distance from src to i is finalised
+    bool shortestSpanTreeSet[V];
+
+    // Parent array to store shortest path tree
+    int parent[V];
+
+    // Initialize all distances as infinity and shortestSpanTreeSet[] as false
+    for (int i = 0; i < V; i++) {
+        parent[0] = -1;
+        shortestDistance[i] = INT_MAX;
+        shortestSpanTreeSet[i] = false;
+    }
+
+    // Initialise distance of src node to itself == 0
+    shortestDistance[src] = 0;
+
+    // Find the shortest path for all nodes
+    for (int count = 0; count < V-1; count++) {
+        // Pick the minimum distance node from set of
+        // nodes not yet traversed. u == src in first iteration.
+        int u = dijkstraMinDistance(shortestDistance, shortestSpanTreeSet);
+
+        // Mark the picked node as traversed
+        shortestSpanTreeSet[u] = true;
+
+        // Update shortestDistance value of the adjacent nodes of the picked node.
+        for (int v = 0; v < V; v++) {
+            // Update shortestDistance[v] only if (all 3 conditions are fulfilled)
+            // 1) shortestDistance[v] is not in shortestSpanTreeSet[],
+            // 2) there is an edge from u to v,
+            // 3) and total distance of path from src to v through u is smaller than current value of shortestDistance[v]
+            if (!shortestSpanTreeSet[v] &&
+                graph->edges[u][v] &&
+                shortestDistance[u] + graph->edges[u][v] < shortestDistance[v]) {
+                parent[v]  = u;
+                shortestDistance[v] = shortestDistance[u] + graph->edges[u][v];
+            }
+        }
+    }
+
+    // print dijkstra algorithm solution
+    printDijkstraSolution(shortestDistance, parent, src, dest);
+
 }
 
 graph* createGraph(int rows,int columns){
