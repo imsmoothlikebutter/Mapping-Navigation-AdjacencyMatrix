@@ -34,7 +34,10 @@ void BFS(graph* graph, int startingPoint, int endingPoint);
 void DFS(graph* graph, int nodeNum);
 void printAllMatrix(graph* graph);
 bool checkAllNodesHasAtLeast1Edge(graph* graph);
-
+int dijkstraMinDistance(int shortestDistance[], bool shortestSpanTreeSet[]);
+void printRouteOfShortestPath(int parent[], int j, int routeTaken[], int pos);
+int printDijkstraSolution(int shortestDistance[], int parent[], int src, int dest);
+void dijkstraTraversal(graph* graph, int src, int dest);
 
 
 
