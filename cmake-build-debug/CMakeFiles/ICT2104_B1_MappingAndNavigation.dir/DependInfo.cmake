@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/zoe/SIT/Y2 tri 1/2104/ICT2104-B1-MappingAndNavigation/graph.c" "CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/graph.c.obj" "gcc" "CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/graph.c.obj.d"
-  "C:/Users/zoe/SIT/Y2 tri 1/2104/ICT2104-B1-MappingAndNavigation/main.c" "CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/main.c.obj" "gcc" "CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/main.c.obj.d"
+  "C:/Users/zheng/OneDrive/Desktop/Current/ICT2104-B1-MappingAndNavigation/graph.c" "CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/graph.c.obj" "gcc" "CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/graph.c.obj.d"
+  "C:/Users/zheng/OneDrive/Desktop/Current/ICT2104-B1-MappingAndNavigation/main.c" "CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/main.c.obj" "gcc" "CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/main.c.obj.d"
   )
 
 # Targets to which this target links.

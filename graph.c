@@ -192,7 +192,7 @@ void DFS(graph* graph, int vertex) {
 // Help function to find the node with the shortest distance, from the set of nodes not included in the shortest path tree set
 int dijkstraMinDistance(int shortestDistance[], bool shortestSpanTreeSet[]) {
     // Initialise minimum value
-    int min = INT_MAX, min_index;
+    int min = 9999, min_index;
     for (int v = 0; v < V; v++) {
         if (shortestSpanTreeSet[v] == false && shortestDistance[v] <= min) {
             min = shortestDistance[v], min_index = v;
@@ -222,9 +222,9 @@ void printRouteOfShortestPath(int parent[], int j, int routeTaken[], int pos) {
 // A helper function to print the shortestDistance array.
 // This function also returns an array (routeTaken[]) which holds the all the nodes
 // traversed in the algorithm (inclusive of start node and end node)
-int printDijkstraSolution(int shortestDistance[], int parent[], int src, int dest) {
+int* printDijkstraSolution(int shortestDistance[], int parent[], int src, int dest) {
     // routeTaken array holds the nodes traversed from start to end
-    int routeTaken[shortestDistance[dest] + 1];
+    int* routeTaken = malloc(sizeof(int) * shortestDistance[dest] + 1);
     int pos = shortestDistance[dest] + 1;
     routeTaken[0] = src; // First element is start node
 
@@ -254,19 +254,19 @@ int printDijkstraSolution(int shortestDistance[], int parent[], int src, int des
 // Function that implements Dijkstra's algorithm on a graph represented using adjacency matrix
 void dijkstraTraversal(graph* graph, int src, int dest) {
     // shortestDistance[i] holds the shortest distance from src to i
-    int shortestDistance[V];
+    int* shortestDistance = malloc(sizeof(int) * V);
 
     // shortestSpanTreeSet[i] == true if node i is included in the shortestSpanTreeSet
     // or shortest distance from src to i is finalised
-    bool shortestSpanTreeSet[V];
+    bool* shortestSpanTreeSet = malloc(sizeof(bool) * V);
 
     // Parent array to store shortest path tree
-    int parent[V];
+    int* parent = malloc(sizeof(int) * V);
 
     // Initialize all distances as infinity and shortestSpanTreeSet[] as false
     for (int i = 0; i < V; i++) {
         parent[0] = -1;
-        shortestDistance[i] = INT_MAX;
+        shortestDistance[i] = 9999;
         shortestSpanTreeSet[i] = false;
     }
 
@@ -300,6 +300,10 @@ void dijkstraTraversal(graph* graph, int src, int dest) {
     // print dijkstra algorithm solution
     printDijkstraSolution(shortestDistance, parent, src, dest);
 
+
+    free(shortestDistance);
+    free(shortestSpanTreeSet);
+    free(parent);
 }
 
 graph* createGraph(int rows,int columns){
