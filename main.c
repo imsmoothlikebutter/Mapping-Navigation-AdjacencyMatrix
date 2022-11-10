@@ -56,7 +56,7 @@ int main(){
     DFS(map, 0);
 
     printf("Djisktra Algo: \n");
-    //dijkstraTraversal(map,0, 4);
+    dijkstraTraversal(map,0, 2, ROWS, COLUMNS);
 
     checkAllNodesHasAtLeast1Edge(map);
 
