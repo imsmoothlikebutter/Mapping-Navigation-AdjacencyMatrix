@@ -224,7 +224,7 @@ void BFS(graph* graph, int startingPoint, int endingPoint) {
             printf("%d ", shortestPath->list[x]);
         }
         printf("\n");
-
+        free(shortestPath);
     }
     else {
         printf("Destination node %d not found!", endingPoint);
@@ -233,6 +233,8 @@ void BFS(graph* graph, int startingPoint, int endingPoint) {
 
     
     printf("\n \n");
+    free(nodesList);
+    free(visitedOrder);
 }
 
 //Depth-first search
