@@ -348,10 +348,11 @@ void dijkstraTraversal(graph* graph, int src, int dest, int ROWS, int COLUMNS) {
 
     // Initialize all distances as infinity and shortestSpanTreeSet[] as false
     for (int i = 0; i < (ROWS * COLUMNS); i++) {
-        parent[0] = -1;
         shortestDistance[i] = 9999;
         shortestSpanTreeSet[i] = false;
     }
+    
+    parent[src] = -1;
 
     // Initialise distance of src node to itself == 0
     shortestDistance[src] = 0;
