@@ -13,9 +13,10 @@ typedef struct graph{
     char** directionsWhenSouth;
     char** directionsWhenWest;
     char** directionsWhenEast;
-    //added for visited and adjacent nodes
+    //added for visited and adjacent nodes, distance and parent node
     int* visited;
     struct node** adjacentNodes;
+    int* parentNode;
     //Added strct node to store array for DFS
     struct node** adjLists;
     int numVertices;
@@ -105,6 +106,7 @@ struct node* createNode(int n) {
     struct node* node = malloc(sizeof(struct node));
     node->nodeNum = n;
     node->next = NULL;
+
     return node;
 }
 
@@ -125,14 +127,12 @@ void BFS(graph* graph, int startingPoint, int endingPoint) {
     while (!queueIsEmpty(nodesList)) {
         int currentNode = dequeue(nodesList);
 
+        //first is used to go back to adjacent nodes head
+        struct node* first = graph->adjacentNodes[currentNode];
+
         printf("Visited node: %d\n", currentNode);
         //add current node into visitedOrder list
         enqueue(visitedOrder, currentNode);
-
-        if (currentNode == endingPoint) {
-            found = 1;
-            break;
-        }
 
         //get adjacent nodes of currentNode
         //while there are adjacent nodes for currentNode
@@ -144,18 +144,87 @@ void BFS(graph* graph, int startingPoint, int endingPoint) {
                 //put adjacent nodes from current node into nodes queue
                 enqueue(nodesList, graph->adjacentNodes[currentNode]->nodeNum);
             }
+            else {
+                //add the node to parent node if it has already been visited
+                graph->parentNode[currentNode] = graph->adjacentNodes[currentNode]->nodeNum;
+            }
             //go to the next node
             graph->adjacentNodes[currentNode] = graph->adjacentNodes[currentNode]->next;
         }
 
+        if (currentNode == endingPoint) {
+            found = 1;
+            break;
+        }
+
+        //reset to head when no more adjacent nodes
+        graph->adjacentNodes[currentNode] = first;
+
     }
 
     if (found == 1) {
+        //new queue for shortest path
+        struct queue* shortestPath = createQueue();
+
         printf("Destination node %d found!", endingPoint);
         printf("\nNodes visited in order: ");
         for (int i = visitedOrder->front; i < visitedOrder->rear + 1; i++) {
             printf("%d ", visitedOrder->list[i]);
         }
+
+        //shortest path (backtracking) portion
+
+        //iterate through visitedOrder from target ending node
+        for (int i = visitedOrder->rear; i > visitedOrder->front - 1; i--) {
+            int currentNode = visitedOrder->list[i];
+
+            //if currentNode has reached the starting node, it should end
+            if (currentNode == startingPoint) {
+                break;
+            }
+            //if currentNode is ending point
+            if (currentNode == endingPoint)  {
+                //add the currentNode and parent node of that into shortest path
+                enqueue(shortestPath, currentNode);
+                //printf("Adding: %d\n", currentNode);
+
+                enqueue(shortestPath, graph->parentNode[currentNode]);
+                //printf("Adding: %d\n", graph->parentNode[currentNode]);
+
+            }
+            else {
+                //iterate through adjacent nodes of currentNode
+                while (graph->adjacentNodes[currentNode]) {
+                    //iterate through shortest path elements
+                    for (int x = shortestPath->rear; x > shortestPath->front - 1; x--) {
+                        //if parent node of current node is in shortest path list, add parent node OR
+                        //if current node is part of shortest path, add parent node
+                        if (graph->parentNode[currentNode] == shortestPath->list[x] || currentNode == shortestPath->list[x]) {
+                            //if not already inside
+                            if (graph->parentNode[currentNode] != shortestPath->list[x]) {
+                                //add parent node to shortest path
+                                enqueue(shortestPath, graph->parentNode[currentNode]);
+                                //printf("Adding: %d\n", graph->parentNode[currentNode]);
+
+                            }
+                            else {
+                                break;
+                            }
+                        }
+                    }
+
+                    //go to next adjacent node
+                    graph->adjacentNodes[currentNode] = graph->adjacentNodes[currentNode]->next;
+                }
+            }
+        }
+
+        printf("\nShortest path for BFS: ");
+        for (int x = shortestPath->rear; x > shortestPath->front - 1; x--) {
+            printf("%d ", shortestPath->list[x]);
+        }
+        printf("\n");
+
     }
     else {
         printf("Destination node %d not found!", endingPoint);
@@ -305,10 +374,12 @@ void dijkstraTraversal(graph* graph, int src, int dest, int ROWS, int COLUMNS) {
 
 graph* createGraph(int rows,int columns){
     graph* result = malloc(sizeof(graph));
-    //initialize adjacent nodes and visited using total number of nodes
+    //for BFS: initialize adjacent nodes and visited, and parent nodes using total number of nodes
     result->adjacentNodes = malloc(rows * columns * sizeof(struct node*));
     result->visited = malloc(rows * columns * sizeof(int));
-    //for BFS
+    result->parentNode = malloc(rows * columns * sizeof(int));
+
+    //for DFS
     result->adjLists = malloc(rows * columns * sizeof(struct node*));
     result->visit = malloc(rows * columns * sizeof(int));
     for (int i = 0; i < rows * columns; i++) {
@@ -839,7 +910,10 @@ bool addEdge(graph* graph, int from_node, int to_node){
         struct node* node = createNode(from_node);
         node->next = graph->adjacentNodes[to_node];
         graph->adjacentNodes[to_node] = node;
-    // for BFS
+        //set parent node of node 0 to -1 as it is root
+        graph->parentNode[0] = -1;
+
+        // for DFS
         node->next = graph->adjLists[to_node];
         graph->adjLists[to_node] = node;
 
