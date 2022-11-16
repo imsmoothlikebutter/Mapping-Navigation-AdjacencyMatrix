@@ -16,6 +16,7 @@ int main(){
     graph* map = createGraph(ROWS,COLUMNS);
     //example on a 3x3 map. Start at grid 4
     //node 4 to 5. right side clear
+
     addEdge(map, 4,5);
     addDirection(map, 4,5,right,orientation);
     orientation = 'E';
@@ -39,12 +40,12 @@ int main(){
     addDirection(map,1,2,forward,orientation);
 
     //printing all different matrices
-    //printEdges(map);
+    printEdges(map);
     //printing the graph in dot format
     printGraph(map);
 
     //printing the graph in a grid map format
-    printMap(map, ROWS, COLUMNS);
+    //printMap(map, ROWS, COLUMNS);
     printf("Current car orientation: %c\n",orientation);
 
     whatDirectionDoITake(map, 0,1);
@@ -53,7 +54,7 @@ int main(){
     BFS(map, 3, 8);
 
     printf("DFS Algo: \n");
-    DFS(map, 0);
+    DFS(map, 0,3);
 
     printf("Djisktra Algo: \n");
     dijkstraTraversal(map,0, 2, ROWS, COLUMNS);

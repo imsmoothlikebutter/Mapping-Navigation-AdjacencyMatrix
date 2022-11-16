@@ -236,22 +236,37 @@ void BFS(graph* graph, int startingPoint, int endingPoint) {
 }
 
 //Depth-first search
-void DFS(graph* graph, int vertex) {
+void DFS(graph* graph, int vertex, int endingPoint) {
     struct node* adjList = graph->adjLists[vertex];
     struct node* temp = adjList;
-
+    int found = 0;
     graph->visit[vertex] = 1;
     printf("Visited in order of DFS %d \n", vertex);
-
-    while (temp != NULL) {
-        int connectedVertex = temp->nodeNum;
-
-        if (graph->visit[connectedVertex] == 0) {
-            //put into visited
-            DFS(graph, connectedVertex);
-        }
-        temp = temp->next;
+    if(vertex == endingPoint){
+        found = 1;
     }
+    if(found == 0){
+        while (temp != NULL) {
+            int connectedVertex = temp->nodeNum;
+
+            if (graph->visit[connectedVertex] == 0) {
+                    //put into visited
+                    DFS(graph, connectedVertex, endingPoint);
+                }
+            temp = temp->next;
+
+        }
+
+    }
+    else if (found == 1){
+        //DFS(graph, connectedVertex, endingPoint);
+        printf("Destination Reached: %d \n", vertex);
+
+    }
+
+
+
+
 }
 
 
