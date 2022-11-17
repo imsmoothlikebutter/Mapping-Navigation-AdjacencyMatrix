@@ -65,7 +65,7 @@ int main(){
     clock_t t2;
     t2 = clock();
     printf("DFS Algo: \n");
-    DFS(map, 3,8);
+    DFS(map, 0,2,0);
     t2 = clock() - t2;
     double time_taken2 = ((double)t)/CLOCKS_PER_SEC; // in seconds
     printf("DFS took %f seconds to execute \n", time_taken2);

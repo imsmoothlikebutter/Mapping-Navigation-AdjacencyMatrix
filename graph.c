@@ -18,10 +18,12 @@ typedef struct graph{
     //added for visited and adjacent nodes, distance and parent node
     int* visited;
     struct node** adjacentNodes;
+
     int* parentNode;
+
     //Added strct node to store array for DFS
     struct node** adjLists;
-    int numVertices;
+    int* parentNode1;
     int* visit;
 }graph;
 
@@ -243,37 +245,114 @@ void BFS(graph* graph, int startingPoint, int endingPoint) {
 }
 
 //Depth-first search
-void DFS(graph* graph, int vertex, int endingPoint) {
-    struct node* adjList = graph->adjLists[vertex];
-    struct node* temp = adjList;
+void DFS(graph* graph, int vertex, int endingPoint, int startingPoint) {
+    struct queue* qq = createQueue();
+    recursiveDFS(graph, vertex, endingPoint, startingPoint, qq);
+}
+
+
+//Depth-first search
+void recursiveDFS(graph* graph, int vertex, int endingPoint,  int startingPoint, struct queue* queue) {
+    struct node *adjList = graph->adjLists[vertex];
+    struct node *temp = adjList;
+    graph->parentNode1[vertex] = graph->adjLists[vertex]->nodeNum;
+
     int found = 0;
     graph->visit[vertex] = 1;
     printf("Visited in order of DFS %d \n", vertex);
-    if(vertex == endingPoint){
+
+    enqueue(queue, vertex);
+    if (vertex == endingPoint) {
         found = 1;
     }
-    if(found == 0){
+
+    if (vertex != endingPoint) {
+
         while (temp != NULL) {
+
             int connectedVertex = temp->nodeNum;
+            //printf("test DFS %d \n", connectedVertex);
+
 
             if (graph->visit[connectedVertex] == 0) {
-                    //put into visited
-                    DFS(graph, connectedVertex, endingPoint);
-                }
+                //put into visited
+
+                recursiveDFS(graph, connectedVertex, endingPoint, startingPoint, queue);
+
+            }
             temp = temp->next;
+
 
         }
 
     }
-    else if (found == 1){
-        //DFS(graph, connectedVertex, endingPoint);
-        printf("Destination Reached: %d \n", vertex);
+
+
+    if (found == 1) {
+        //new queue for shortest path
+
+
+        printf("Destination node %d found!", endingPoint);
+        printf("\nNodes visited in order: ");
+        for (int i = queue->front; i < queue->rear + 1; i++) {
+            printf("%d ", queue->list[i]);
+        }
+
+        //shortest path (backtracking) portion
+        struct queue *shortestPath = createQueue();
+        //iterate through visitedOrder from target ending node
+        for (int i = queue->rear; i > queue->front - 1; i--) {
+            int currentNode = queue->list[i];
+
+            //if currentNode has reached the starting node, it should end
+            if (currentNode == startingPoint) {
+                break;
+            }
+            //if currentNode is ending point
+            if (currentNode == endingPoint) {
+                //add the currentNode and parent node of that into shortest path
+                enqueue(shortestPath, currentNode);
+                //printf("Adding: %d\n", currentNode);
+
+                enqueue(shortestPath, graph->parentNode1[currentNode]);
+                //printf("Adding: %d\n", graph->parentNode[currentNode]);
+
+            } else {
+                //iterate through adjacent nodes of currentNode
+                while (graph->adjLists[currentNode]) {
+
+                    //iterate through shortest path elements
+                    for (int x = shortestPath->rear; x > shortestPath->front - 1; x--) {
+                        //if parent node of current node is in shortest path list, add parent node OR
+                        //if current node is part of shortest path, add parent node
+                        if (graph->parentNode1[currentNode] == shortestPath->list[x] ||
+                            currentNode == shortestPath->list[x]) {
+                            //if not already inside
+                            if (graph->parentNode1[currentNode] != shortestPath->list[x]) {
+                                //add parent node to shortest path
+                                enqueue(shortestPath, graph->parentNode1[currentNode]);
+                                printf("Adding : %d\n", graph->parentNode1[currentNode]);
+
+                            } else {
+                                break;
+                            }
+                        }
+                    }
+
+                    //go to next adjacent node
+                    graph->adjLists[currentNode] = graph->adjLists[currentNode]->next;
+                }
+            }
+        }
+
+        printf("\nShortest path for DFS: ");
+        for (int x = shortestPath->rear; x > shortestPath->front - 1; x--) {
+            printf(" %d ", shortestPath->list[x]);
+        }
+        printf("\n");
+
 
     }
-
-
-
-
 }
 
 int getDijkstraNodes(){
@@ -291,6 +370,7 @@ int dijkstraMinDistance(int shortestDistance[], bool shortestSpanTreeSet[], int 
     }
     return min_index;
 }
+
 
 
 // Function to print shortest path from source to j using parent array
@@ -361,7 +441,7 @@ int* dijkstraTraversal(graph* graph, int src, int dest, int ROWS, int COLUMNS) {
         shortestDistance[i] = 9999;
         shortestSpanTreeSet[i] = false;
     }
-    
+
     parent[src] = -1;
 
     // Initialise distance of src node to itself == 0
@@ -404,9 +484,11 @@ graph* createGraph(int rows,int columns){
     result->visited = malloc(rows * columns * sizeof(int));
     result->parentNode = malloc(rows * columns * sizeof(int));
 
+
     //for DFS
     result->adjLists = malloc(rows * columns * sizeof(struct node*));
     result->visit = malloc(rows * columns * sizeof(int));
+    result->parentNode1 = malloc(rows * columns * sizeof(int));
     for (int i = 0; i < rows * columns; i++) {
         //set adjacent nodes to null and visited to 0
         result->adjacentNodes[i] = NULL;
@@ -414,6 +496,8 @@ graph* createGraph(int rows,int columns){
 
         result->adjLists[i] = NULL;
         result->visit[i] = 0;
+        //result->parentNode1[i] =0;
+
     }
 
     if(result != NULL){

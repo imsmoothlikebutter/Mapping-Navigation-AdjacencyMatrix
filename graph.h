@@ -2,8 +2,17 @@
 #define GRAPH
 #include <stdbool.h>
 
+
 typedef struct graph graph;
+typedef struct queue queue;
 typedef struct routeAndLength routeAndLength;
+typedef struct node node;
+queue* createQueue();
+bool queueIsEmpty(queue* queue);
+bool queueIsFull(queue* queue);
+void enqueue(struct queue* queue, int num);
+int dequeue(struct queue* queue);
+node* createNode(int n);
 graph* createGraph(int rows,int columns);
 void destroyGraph(graph* graph);
 void printEdges(graph* graph);
@@ -32,7 +41,8 @@ void printHumps(graph* graph);
 void printGraph(graph* graph);
 void printMap(graph* graph, int rows, int columns);
 void BFS(graph* graph, int startingPoint, int endingPoint);
-void DFS(graph* graph, int nodeNum,int endingPoint);
+void DFS(graph* graph, int nodeNum,int endingPoint,int startingPoint);
+void recursiveDFS(graph* graph, int nodeNum,int endingPoint, int startingPoint, queue* queue);
 void printAllMatrix(graph* graph);
 bool checkAllNodesHasAtLeast1Edge(graph* graph);
 int dijkstraMinDistance(int shortestDistance[], bool shortestSpanTreeSet[], int ROWS, int COLUMNS);
@@ -40,6 +50,7 @@ void printRouteOfShortestPath(int parent[], int j, int routeTaken[], int pos, in
 int* printDijkstraSolution(int shortestDistance[], int parent[], int src, int dest, int ROWS, int COLUMNS);
 int* dijkstraTraversal(graph* graph, int src, int dest, int ROWS, int COLUMNS);
 int getDijkstraNodes();
+
 
 
 #endif // !GRAPH
