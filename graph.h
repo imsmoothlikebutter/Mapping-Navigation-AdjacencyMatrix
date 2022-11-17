@@ -37,9 +37,9 @@ void printAllMatrix(graph* graph);
 bool checkAllNodesHasAtLeast1Edge(graph* graph);
 int dijkstraMinDistance(int shortestDistance[], bool shortestSpanTreeSet[], int ROWS, int COLUMNS);
 void printRouteOfShortestPath(int parent[], int j, int routeTaken[], int pos, int ROWS, int COLUMNS);
-routeAndLength* printDijkstraSolution(int shortestDistance[], int parent[], int src, int dest, int ROWS, int COLUMNS);
-routeAndLength* dijkstraTraversal(graph* graph, int src, int dest, int ROWS, int COLUMNS);
-
+int* printDijkstraSolution(int shortestDistance[], int parent[], int src, int dest, int ROWS, int COLUMNS);
+int* dijkstraTraversal(graph* graph, int src, int dest, int ROWS, int COLUMNS);
+int getDijkstraNodes();
 
 
 #endif // !GRAPH

@@ -4,6 +4,8 @@
 #include <string.h>
 #define SIZE 40
 
+int numberOfNodesTraversedInDijkstra;
+
 typedef struct graph{
     int numOfNodes;
     bool** edges;
@@ -274,6 +276,9 @@ void DFS(graph* graph, int vertex, int endingPoint) {
 
 }
 
+int getDijkstraNodes(){
+    return numberOfNodesTraversedInDijkstra;
+}
 
 // Help function to find the node with the shortest distance, from the set of nodes not included in the shortest path tree set
 int dijkstraMinDistance(int shortestDistance[], bool shortestSpanTreeSet[], int ROWS, int COLUMNS) {
@@ -308,7 +313,7 @@ void printRouteOfShortestPath(int parent[], int j, int routeTaken[], int pos, in
 // A helper function to print the shortestDistance array.
 // This function also returns an array (routeTaken[]) which holds the all the nodes
 // traversed in the algorithm (inclusive of start node and end node)
-routeAndLength* printDijkstraSolution(int shortestDistance[], int parent[], int src, int dest, int ROWS, int COLUMNS) {
+int* printDijkstraSolution(int shortestDistance[], int parent[], int src, int dest, int ROWS, int COLUMNS) {
     // routeTaken array holds the nodes traversed from start to end
     int* routeTaken = malloc(sizeof(int) * shortestDistance[dest] + 1);
     int pos = shortestDistance[dest] + 1;
@@ -332,23 +337,15 @@ routeAndLength* printDijkstraSolution(int shortestDistance[], int parent[], int 
     }
     printf("\n");
 
-    routeAndLength* rs = malloc(sizeof(routeAndLength*));
-    rs->routesTaken = malloc(sizeof(int) * shortestDistance[dest] + 1);
-    rs->totalNumberOfNodesInRoutesTaken = pos;
-    rs->routesTaken = routeTaken;
-
-    for (int i = 0; i <= shortestDistance[dest]; i++){
-        printf("rs: %d\n", rs->routesTaken[i]);
-    }
-    printf("totalNumberOfNodesInRoutesTaken: %d\n", rs->totalNumberOfNodesInRoutesTaken);
+    numberOfNodesTraversedInDijkstra = shortestDistance[dest] + 1;
 
     free(shortestDistance);
     free(parent);
-    return rs;
+    return routeTaken;
 }
 
 // Function that implements Dijkstra's algorithm on a graph represented using adjacency matrix
-routeAndLength* dijkstraTraversal(graph* graph, int src, int dest, int ROWS, int COLUMNS) {
+int* dijkstraTraversal(graph* graph, int src, int dest, int ROWS, int COLUMNS) {
     // shortestDistance[i] holds the shortest distance from src to i
     int* shortestDistance = malloc(sizeof(int) * (ROWS * COLUMNS));
 

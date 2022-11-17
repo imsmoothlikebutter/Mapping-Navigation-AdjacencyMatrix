@@ -56,12 +56,19 @@ int main(){
     printf("DFS Algo: \n");
     DFS(map, 3,8);
 
-    printf("Djisktra Algo: \n");
-    routeAndLength* rl = dijkstraTraversal(map,3, 8, ROWS, COLUMNS);
-    printf("%d rl length is: \n", rl->length);
+    printf("Dijsktra Algo: \n");
+    int* rl = dijkstraTraversal(map,3, 8, ROWS, COLUMNS);
+    int numberOfNodes = getDijkstraNodes();
+
+    // Access the nodes from dijkstra algo here
+    for ( int i = 0; i < numberOfNodes; i++){
+        printf("rl: %d\n", rl[i]);
+    }
+
     checkAllNodesHasAtLeast1Edge(map);
 
     //freeing mem
     destroyGraph(map);
+    free(rl);
     return 0;
 }
