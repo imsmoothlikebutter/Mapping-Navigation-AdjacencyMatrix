@@ -54,11 +54,11 @@ int main(){
     BFS(map, 3, 8);
 
     printf("DFS Algo: \n");
-    DFS(map, 0,3);
+    DFS(map, 3,8);
 
     printf("Djisktra Algo: \n");
-    dijkstraTraversal(map,0, 2, ROWS, COLUMNS);
-
+    routeAndLength* rl = dijkstraTraversal(map,3, 8, ROWS, COLUMNS);
+    printf("%d rl length is: \n", rl->length);
     checkAllNodesHasAtLeast1Edge(map);
 
     //freeing mem

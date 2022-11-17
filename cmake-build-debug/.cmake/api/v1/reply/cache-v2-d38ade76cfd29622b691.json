@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/zheng/OneDrive/Desktop/Current/ICT2104-B1-MappingAndNavigation/cmake-build-debug"
+			"value" : "c:/Users/zheng/Desktop/Dijkstra/ICT2104-B1-MappingAndNavigation/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -539,7 +539,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/zheng/OneDrive/Desktop/Current/ICT2104-B1-MappingAndNavigation"
+			"value" : "C:/Users/zheng/Desktop/Dijkstra/ICT2104-B1-MappingAndNavigation"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1159,7 +1159,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/zheng/OneDrive/Desktop/Current/ICT2104-B1-MappingAndNavigation/cmake-build-debug"
+			"value" : "C:/Users/zheng/Desktop/Dijkstra/ICT2104-B1-MappingAndNavigation/cmake-build-debug"
 		},
 		{
 			"name" : "ICT2104_B1_MappingAndNavigation_IS_TOP_LEVEL",
@@ -1183,7 +1183,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/zheng/OneDrive/Desktop/Current/ICT2104-B1-MappingAndNavigation"
+			"value" : "C:/Users/zheng/Desktop/Dijkstra/ICT2104-B1-MappingAndNavigation"
 		}
 	],
 	"kind" : "cache",

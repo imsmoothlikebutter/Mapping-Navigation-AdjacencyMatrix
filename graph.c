@@ -34,9 +34,12 @@ typedef struct queue {
 typedef struct node {
     int nodeNum;
     struct node* next;
-
 }node;
 
+typedef struct routeAndLength {
+    int* routesTaken;
+    int totalNumberOfNodesInRoutesTaken;
+}routeAndLength;
 
 //queue methods
 struct queue* createQueue() {
@@ -305,12 +308,11 @@ void printRouteOfShortestPath(int parent[], int j, int routeTaken[], int pos, in
 // A helper function to print the shortestDistance array.
 // This function also returns an array (routeTaken[]) which holds the all the nodes
 // traversed in the algorithm (inclusive of start node and end node)
-int* printDijkstraSolution(int shortestDistance[], int parent[], int src, int dest, int ROWS, int COLUMNS) {
+routeAndLength* printDijkstraSolution(int shortestDistance[], int parent[], int src, int dest, int ROWS, int COLUMNS) {
     // routeTaken array holds the nodes traversed from start to end
     int* routeTaken = malloc(sizeof(int) * shortestDistance[dest] + 1);
     int pos = shortestDistance[dest] + 1;
     routeTaken[0] = src; // First element is start node
-
     // Printing out the vertex, distance, path taken to traverse from src node to dest node
     printf("Vertex\t  Distance\tPath");
     for (int i = 0; i < (ROWS * COLUMNS); i++) {
@@ -319,7 +321,6 @@ int* printDijkstraSolution(int shortestDistance[], int parent[], int src, int de
             printf("\n%d -> %d \t\t %d\t\t%d ", src, i, shortestDistance[i], src);
             printRouteOfShortestPath(parent, i, routeTaken, pos, ROWS, COLUMNS);
         }
-
     }
 
     routeTaken[pos-1] = dest; // Last element is end node
@@ -331,11 +332,23 @@ int* printDijkstraSolution(int shortestDistance[], int parent[], int src, int de
     }
     printf("\n");
 
-    return routeTaken;
+    routeAndLength* rs = malloc(sizeof(routeAndLength*));
+    rs->routesTaken = malloc(sizeof(int) * shortestDistance[dest] + 1);
+    rs->totalNumberOfNodesInRoutesTaken = pos;
+    rs->routesTaken = routeTaken;
+
+    for (int i = 0; i <= shortestDistance[dest]; i++){
+        printf("rs: %d\n", rs->routesTaken[i]);
+    }
+    printf("totalNumberOfNodesInRoutesTaken: %d\n", rs->totalNumberOfNodesInRoutesTaken);
+
+    free(shortestDistance);
+    free(parent);
+    return rs;
 }
 
 // Function that implements Dijkstra's algorithm on a graph represented using adjacency matrix
-void dijkstraTraversal(graph* graph, int src, int dest, int ROWS, int COLUMNS) {
+routeAndLength* dijkstraTraversal(graph* graph, int src, int dest, int ROWS, int COLUMNS) {
     // shortestDistance[i] holds the shortest distance from src to i
     int* shortestDistance = malloc(sizeof(int) * (ROWS * COLUMNS));
 
@@ -381,13 +394,10 @@ void dijkstraTraversal(graph* graph, int src, int dest, int ROWS, int COLUMNS) {
         }
     }
 
-    // print dijkstra algorithm solution
-    printDijkstraSolution(shortestDistance, parent, src, dest, ROWS, COLUMNS);
-
-
-    free(shortestDistance);
     free(shortestSpanTreeSet);
-    free(parent);
+    // print dijkstra algorithm route and return an array of the nodes traversed
+    return printDijkstraSolution(shortestDistance, parent, src, dest, ROWS, COLUMNS);
+
 }
 
 graph* createGraph(int rows,int columns){
