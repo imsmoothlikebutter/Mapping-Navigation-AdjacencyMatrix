@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/Users/muhdismaelosman/git/ICT2104-B1-MappingAndNavigation/build",
+  "command": "/usr/bin/clang  -I/Users/muhdismaelosman/git/ICT2104-B1-MappingAndNavigation/. -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.0.sdk -std=gnu11 -o CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/graph.c.o -c /Users/muhdismaelosman/git/ICT2104-B1-MappingAndNavigation/graph.c",
+  "file": "/Users/muhdismaelosman/git/ICT2104-B1-MappingAndNavigation/graph.c"
+},
+{
+  "directory": "/Users/muhdismaelosman/git/ICT2104-B1-MappingAndNavigation/build",
+  "command": "/usr/bin/clang  -I/Users/muhdismaelosman/git/ICT2104-B1-MappingAndNavigation/. -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.0.sdk -std=gnu11 -o CMakeFiles/ICT2104_B1_MappingAndNavigation.dir/main.c.o -c /Users/muhdismaelosman/git/ICT2104-B1-MappingAndNavigation/main.c",
+  "file": "/Users/muhdismaelosman/git/ICT2104-B1-MappingAndNavigation/main.c"
+}
+]

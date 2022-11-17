@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "graph.h"
 #define ROWS 3
 #define COLUMNS 3
@@ -16,7 +17,9 @@ int main(){
     graph* map = createGraph(ROWS,COLUMNS);
     //example on a 3x3 map. Start at grid 4
     //node 4 to 5. right side clear
-
+    // 0 1 2
+    // 3 4 5
+    // 6 7 8
     addEdge(map, 4,5);
     addDirection(map, 4,5,right,orientation);
     orientation = 'E';
@@ -50,23 +53,34 @@ int main(){
 
     whatDirectionDoITake(map, 0,1);
 
-    printf("BFS Algo: \n");
-    BFS(map, 3, 8);
 
+    clock_t t;
+    t = clock();
+    printf("BFS Algo: \n");
+    BFS(map, 6, 4);
+    t = clock() - t;
+    double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
+    printf("BFS took %f seconds to execute \n", time_taken);
+
+    clock_t t2;
+    t2 = clock();
     printf("DFS Algo: \n");
     DFS(map, 3,8);
+    t2 = clock() - t2;
+    double time_taken2 = ((double)t)/CLOCKS_PER_SEC; // in seconds
+    printf("DFS took %f seconds to execute \n", time_taken2);
 
+    clock_t t3;
+    t3 = clock();
     printf("Dijsktra Algo: \n");
-    int* dijkstraNodes = dijkstraTraversal(map,1, 8, ROWS, COLUMNS);
+    int* dijkstraNodes = dijkstraTraversal(map,6, 4, ROWS, COLUMNS);
     int numberOfNodesInDijkstra = getDijkstraNodes();
 
-    // Access the nodes from dijkstra algo here
-    for ( int i = 0; i < numberOfNodesInDijkstra; i++){
-        printf("%d\n", dijkstraNodes[i]);
-    }
+    t3 = clock() - t3;
+    double time_taken3 = ((double)t)/CLOCKS_PER_SEC; // in seconds
+    printf("Dijsktra took %f seconds to execute \n", time_taken3);
 
     checkAllNodesHasAtLeast1Edge(map);
-
     //freeing mem
     destroyGraph(map);
     free(dijkstraNodes);

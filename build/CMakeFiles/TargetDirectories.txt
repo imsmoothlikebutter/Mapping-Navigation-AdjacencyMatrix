@@ -1,0 +1,3 @@
+/Users/muhdismaelosman/git/ICT2104-B1-MappingAndNavigation/build/CMakeFiles/ICT2104_B1_MappingAndNavigation.dir
+/Users/muhdismaelosman/git/ICT2104-B1-MappingAndNavigation/build/CMakeFiles/edit_cache.dir
+/Users/muhdismaelosman/git/ICT2104-B1-MappingAndNavigation/build/CMakeFiles/rebuild_cache.dir

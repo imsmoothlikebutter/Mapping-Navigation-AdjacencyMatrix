@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.23"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "ICT2104_B1_MappingAndNavigation",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ICT2104_B1_MappingAndNavigation::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ICT2104_B1_MappingAndNavigation-Debug-e991f2e1f7e5aa4041a3.json",
+					"name" : "ICT2104_B1_MappingAndNavigation",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/muhdismaelosman/git/ICT2104-B1-MappingAndNavigation/build",
+		"source" : "/Users/muhdismaelosman/git/ICT2104-B1-MappingAndNavigation"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}
