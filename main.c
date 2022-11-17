@@ -45,7 +45,7 @@ int main(){
     printGraph(map);
 
     //printing the graph in a grid map format
-    //printMap(map, ROWS, COLUMNS);
+//    printMap(map, ROWS, COLUMNS);
     printf("Current car orientation: %c\n",orientation);
 
     whatDirectionDoITake(map, 0,1);
@@ -57,18 +57,18 @@ int main(){
     DFS(map, 3,8);
 
     printf("Dijsktra Algo: \n");
-    int* rl = dijkstraTraversal(map,3, 8, ROWS, COLUMNS);
-    int numberOfNodes = getDijkstraNodes();
+    int* dijkstraNodes = dijkstraTraversal(map,1, 8, ROWS, COLUMNS);
+    int numberOfNodesInDijkstra = getDijkstraNodes();
 
     // Access the nodes from dijkstra algo here
-    for ( int i = 0; i < numberOfNodes; i++){
-        printf("rl: %d\n", rl[i]);
+    for ( int i = 0; i < numberOfNodesInDijkstra; i++){
+        printf("%d\n", dijkstraNodes[i]);
     }
 
     checkAllNodesHasAtLeast1Edge(map);
 
     //freeing mem
     destroyGraph(map);
-    free(rl);
+    free(dijkstraNodes);
     return 0;
 }
