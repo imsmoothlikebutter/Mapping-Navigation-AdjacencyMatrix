@@ -48,7 +48,7 @@ int main(){
     printGraph(map);
 
     //printing the graph in a grid map format
-//    printMap(map, ROWS, COLUMNS);
+    //printMap(map, ROWS, COLUMNS);
     printf("Current car orientation: %c\n",orientation);
 
     whatDirectionDoITake(map, 0,1);
@@ -57,7 +57,7 @@ int main(){
     clock_t t;
     t = clock();
     printf("BFS Algo: \n");
-    BFS(map, 6, 4);
+    BFS(map, 0, 2);
     t = clock() - t;
     double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
     printf("BFS took %f seconds to execute \n", time_taken);
@@ -65,7 +65,7 @@ int main(){
     clock_t t2;
     t2 = clock();
     printf("DFS Algo: \n");
-    DFS(map, 0,2,0);
+    DFS(map, 0,5,0);
     t2 = clock() - t2;
     double time_taken2 = ((double)t)/CLOCKS_PER_SEC; // in seconds
     printf("DFS took %f seconds to execute \n", time_taken2);
@@ -81,8 +81,9 @@ int main(){
     printf("Dijsktra took %f seconds to execute \n", time_taken3);
 
     checkAllNodesHasAtLeast1Edge(map);
+
     //freeing mem
     destroyGraph(map);
-    free(dijkstraNodes);
-    return 0;
+    //free(dijkstraNodes);
+    //return 0;
 }
