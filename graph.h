@@ -40,7 +40,7 @@ void printBarcodes(graph* graph);
 void printHumps(graph* graph);
 void printGraph(graph* graph);
 void printMap(graph* graph, int rows, int columns);
-void BFS(graph* graph, int startingPoint, int endingPoint);
+int* BFS(graph* graph, int startingPoint, int endingPoint);
 void DFS(graph* graph, int nodeNum,int endingPoint,int startingPoint);
 void recursiveDFS(graph* graph, int nodeNum,int endingPoint, int startingPoint,struct queue* queue);
 void printDFS(graph* graph,int endingPoint, int startingPoint,struct queue* queue);

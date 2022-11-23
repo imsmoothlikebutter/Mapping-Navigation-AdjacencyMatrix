@@ -57,18 +57,18 @@ int main(){
     clock_t t;
     t = clock();
     printf("BFS Algo: \n");
-    BFS(map, 0, 2);
+    BFS(map, 6, 4);
     t = clock() - t;
     double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
-    printf("BFS took %f seconds to execute \n", time_taken);
+    printf("BFS took %f seconds to execute\n\n", time_taken);
 
     clock_t t2;
     t2 = clock();
     printf("DFS Algo: \n");
-    DFS(map, 0,5,0);
+    DFS(map, 6,4,6);
     t2 = clock() - t2;
-    double time_taken2 = ((double)t)/CLOCKS_PER_SEC; // in seconds
-    printf("DFS took %f seconds to execute \n", time_taken2);
+    double time_taken2 = ((double)t2)/CLOCKS_PER_SEC; // in seconds
+    printf("DFS took %f seconds to execute\n\n", time_taken2);
 
     clock_t t3;
     t3 = clock();
@@ -77,8 +77,8 @@ int main(){
     int numberOfNodesInDijkstra = getDijkstraNodes();
 
     t3 = clock() - t3;
-    double time_taken3 = ((double)t)/CLOCKS_PER_SEC; // in seconds
-    printf("Dijsktra took %f seconds to execute \n", time_taken3);
+    double time_taken3 = ((double)t3)/CLOCKS_PER_SEC; // in seconds
+    printf("Dijsktra took %f seconds to execute\n\n", time_taken3);
 
     checkAllNodesHasAtLeast1Edge(map);
 

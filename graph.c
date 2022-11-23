@@ -118,7 +118,7 @@ struct node* createNode(int n) {
 }
 
 //breadth-first search
-void BFS(graph* graph, int startingPoint, int endingPoint) {
+int* BFS(graph* graph, int startingPoint, int endingPoint) {
     //create queue for all nodes
     struct queue* nodesList = createQueue();
     //create queue to store order to print at the end
@@ -154,6 +154,12 @@ void BFS(graph* graph, int startingPoint, int endingPoint) {
             else {
                 //add the node to parent node if it has already been visited
                 graph->parentNode[currentNode] = graph->adjacentNodes[currentNode]->nodeNum;
+                if (currentNode == endingPoint) {
+                    found = 1;
+                    //reset to head before break
+                    graph->adjacentNodes[currentNode] = first;
+                    break;
+                }
             }
             //go to the next node
             graph->adjacentNodes[currentNode] = graph->adjacentNodes[currentNode]->next;
@@ -166,7 +172,6 @@ void BFS(graph* graph, int startingPoint, int endingPoint) {
 
         //reset to head when no more adjacent nodes
         graph->adjacentNodes[currentNode] = first;
-
     }
 
     if (found == 1) {
@@ -226,22 +231,34 @@ void BFS(graph* graph, int startingPoint, int endingPoint) {
             }
         }
 
+        int* list = malloc((shortestPath->rear+1) * sizeof (int));
+
+        //initialize list elements to -1
+        for (int i = 0; i < shortestPath->rear + 1; i++) {
+            list[i] = -1;
+        }
+
         printf("\nShortest path for BFS: ");
         for (int x = shortestPath->rear; x > shortestPath->front - 1; x--) {
             printf("%d ", shortestPath->list[x]);
+            list[shortestPath->rear - x] = shortestPath->list[x];
         }
+
         printf("\n");
         free(shortestPath);
+
+        return list;
     }
     else {
         printf("Destination node %d not found!", endingPoint);
     }
 
-
-    
     printf("\n \n");
+
     free(nodesList);
     free(visitedOrder);
+
+    return NULL;
 }
 
 //Depth-first search
