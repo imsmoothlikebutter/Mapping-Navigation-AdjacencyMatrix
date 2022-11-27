@@ -51,6 +51,8 @@ void printRouteOfShortestPath(int parent[], int j, int routeTaken[], int pos, in
 int* printDijkstraSolution(int shortestDistance[], int parent[], int src, int dest, int ROWS, int COLUMNS);
 int* dijkstraTraversal(graph* graph, int src, int dest, int ROWS, int COLUMNS);
 int getDijkstraNodes();
+int nextGrid(int currentNode,int columns, char direction, char orientation);
+bool hasTraveledGrid(graph* map, int destination);
 
 
 

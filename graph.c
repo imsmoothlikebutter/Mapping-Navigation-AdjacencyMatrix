@@ -7,6 +7,7 @@
 int numberOfNodesTraversedInDijkstra;
 
 typedef struct graph{
+    int* gridVisited;
     int numOfNodes;
     bool** edges;
     bool** barcodes;
@@ -612,6 +613,7 @@ graph* createGraph(int rows,int columns){
                 printf("DirectionsWhenEastMatrix cannot be created(2)");
             }
         }
+        result->gridVisited = calloc(sizeof(int), result->numOfNodes);
         //sometimes calloc will not initialized everything to zero, so we 
         //explicitly have to initliase it.
         for (int i = 0; i < result->numOfNodes; i++){
@@ -1240,4 +1242,95 @@ bool checkAllNodesHasAtLeast1Edge(graph* graph){
         printf("Some nodes don't have an edge!\n");
         return false;
     }
+}
+
+int nextGrid(int currentNode,int columns, char direction, char orientation){
+  int nextGrid;
+  if(orientation == 'N'){
+    if(direction == 'F'){
+      nextGrid = currentNode - columns;
+      return nextGrid;
+    }
+    else if(direction == 'B'){
+      nextGrid = currentNode + columns;
+      return nextGrid;
+    }
+    else if(direction == 'R'){
+      nextGrid = currentNode + 1;
+      return nextGrid;
+    }
+    else if(direction == 'L'){
+      nextGrid = currentNode - 1;
+      return nextGrid;
+    }
+  }
+  else if(orientation == 'S'){
+    if(direction == 'F'){
+      nextGrid = currentNode + columns;
+      return nextGrid;
+    }
+    else if(direction == 'B'){
+      nextGrid = currentNode - columns;
+      return nextGrid;
+    }
+    else if(direction == 'R'){
+      nextGrid = currentNode - 1;
+      return nextGrid;
+    }
+    else if(direction == 'L'){
+      nextGrid = currentNode + 1;
+      return nextGrid;
+    }
+  }
+  else if(orientation == 'E'){
+    if(direction == 'F'){
+      nextGrid = currentNode + 1;
+      return nextGrid;
+    }
+    else if(direction == 'B'){
+      nextGrid = currentNode - 1;
+      return nextGrid;
+    }
+    else if(direction == 'R'){
+      nextGrid = currentNode + columns;
+      return nextGrid;
+    }
+    else if(direction == 'L'){
+      nextGrid = currentNode - columns;
+      return nextGrid;
+    }
+  }
+  else if(orientation == 'W'){
+    if(direction == 'F'){
+      nextGrid = currentNode - 1;
+      return nextGrid;
+    }
+    else if(direction == 'B'){
+      nextGrid = currentNode + 1;
+      return nextGrid;
+    }
+    else if(direction == 'R'){
+      nextGrid = currentNode - columns;
+      return nextGrid;
+    }
+    else if(direction == 'L'){
+      nextGrid = currentNode + columns;
+      return nextGrid;
+    }
+  }
+  return -99;
+}
+
+bool hasTraveledGrid(graph* map, int destination){
+    bool traveled;
+    for(int i = 0; i<map->numOfNodes;i++){
+        if(map->gridVisited[i] == destination){
+            traveled = true;
+        }
+        else{
+            map->gridVisited[i] = destination;
+            traveled = false;
+        }
+    }
+    return traveled;
 }
