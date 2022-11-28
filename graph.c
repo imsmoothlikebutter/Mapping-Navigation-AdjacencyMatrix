@@ -123,11 +123,11 @@ struct node* createNode(int n) {
 //breadth-first search
 int* BFS(graph* graph, int startingPoint, int endingPoint) {
     if (startingPoint < 0 || startingPoint > graph->numOfNodes) {
-        printf("Source node not found!\n");
+        printf("Source node %d not found!\n", startingPoint);
         return NULL;
     }
     if (endingPoint < 0 || endingPoint > graph->numOfNodes) {
-        printf("Destination node not found!\n");
+        printf("Destination node %d not found!\n", endingPoint);
         return NULL;
     }
 
