@@ -201,26 +201,21 @@ int* BFS(graph* graph, int startingPoint, int endingPoint) {
                 enqueue(shortestPath, graph->parentNode[currentNode]);
             }
             else {
-                //iterate through adjacent nodes of currentNode
-                while (graph->adjacentNodes[currentNode]) {
-                    //iterate through shortest path elements
-                    for (int x = shortestPath->rear; x > shortestPath->front - 1; x--) {
-                        //if parent node of current node is in shortest path list, add parent node OR
-                        //if current node is part of shortest path, add parent node
-                        if (graph->parentNode[currentNode] == shortestPath->list[x] ||
+                //iterate through shortest path elements
+                for (int x = shortestPath->rear; x > shortestPath->front - 1; x--) {
+                    //if parent node of current node is in shortest path list, add parent node OR
+                    //if current node is part of shortest path, add parent node
+                    if (graph->parentNode[currentNode] == shortestPath->list[x] ||
                         currentNode == shortestPath->list[x]) {
-                            //if not already inside
-                            if (graph->parentNode[currentNode] != shortestPath->list[x]) {
-                                //add parent node to shortest path
-                                enqueue(shortestPath, graph->parentNode[currentNode]);
-                            }
-                            else {
-                                break;
-                            }
+                        //if not already inside
+                        if (graph->parentNode[currentNode] != shortestPath->list[x]) {
+                            //add parent node to shortest path
+                            enqueue(shortestPath, graph->parentNode[currentNode]);
+                        }
+                        else {
+                            break;
                         }
                     }
-                    //go to next adjacent node
-                    graph->adjacentNodes[currentNode] = graph->adjacentNodes[currentNode]->next;
                 }
             }
         }
