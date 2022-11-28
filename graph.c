@@ -266,10 +266,18 @@ int* BFS(graph* graph, int startingPoint, int endingPoint) {
 int found = 0;
 //Depth-first search
 void DFS(graph* graph, int vertex, int endingPoint, int startingPoint) {
-    struct queue* qq = createQueue();
-    recursiveDFS(graph, vertex, endingPoint, startingPoint, qq);
-    if (found == 1) {
-        printDFS(graph,endingPoint,startingPoint,qq);
+    if (startingPoint < 0 || startingPoint > graph->numOfNodes) {
+        printf("Source node %d not found!\n", startingPoint);
+    }
+    else if (endingPoint < 0 || endingPoint > graph->numOfNodes) {
+        printf("Destination node %d not found!\n", endingPoint);
+    }
+    else {
+        struct queue *qq = createQueue();
+        recursiveDFS(graph, vertex, endingPoint, startingPoint, qq);
+        if (found == 1) {
+            printDFS(graph, endingPoint, startingPoint, qq);
+        }
     }
 }
 
