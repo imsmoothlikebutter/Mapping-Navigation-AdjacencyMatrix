@@ -28,6 +28,7 @@ typedef struct graph{
     int* visit;
 }graph;
 
+//START OF BFS AND DFS STRUCTS
 //queue struct
 typedef struct queue {
     int list[SIZE];
@@ -40,12 +41,9 @@ typedef struct node {
     int nodeNum;
     struct node* next;
 }node;
+//END OF BFS AND DFS STRUCTS
 
-typedef struct routeAndLength {
-    int* routesTaken;
-    int totalNumberOfNodesInRoutesTaken;
-}routeAndLength;
-
+//START OF QUEUE METHODS (BFS AND DFS)
 //queue methods
 struct queue* createQueue() {
     struct queue* queue = malloc(sizeof(struct queue));
@@ -108,7 +106,9 @@ int dequeue(struct queue* queue) {
 
     return removed;
 }
+//END OF QUEUE METHODS (BFS AND DFS)
 
+//START OF NODE METHOD (BFS AND DFS)
 //create node method
 struct node* createNode(int n) {
     struct node* node = malloc(sizeof(struct node));
@@ -117,7 +117,9 @@ struct node* createNode(int n) {
 
     return node;
 }
+//END OF NODE METHOD (BFS AND DFS)
 
+//START OF BFS
 //breadth-first search
 int* BFS(graph* graph, int startingPoint, int endingPoint) {
     //create queue for all nodes
@@ -126,7 +128,6 @@ int* BFS(graph* graph, int startingPoint, int endingPoint) {
     struct queue* visitedOrder = createQueue();
 
     int found = 0;
-
     //mark starting point as visited
     graph->visited[startingPoint] = 1;
     enqueue(nodesList, startingPoint);
@@ -178,15 +179,12 @@ int* BFS(graph* graph, int startingPoint, int endingPoint) {
     if (found == 1) {
         //new queue for shortest path
         struct queue* shortestPath = createQueue();
-
         printf("Destination node %d found!", endingPoint);
         printf("\nNodes visited in order: ");
         for (int i = visitedOrder->front; i < visitedOrder->rear + 1; i++) {
             printf("%d ", visitedOrder->list[i]);
         }
-
         //shortest path (backtracking) portion
-
         //iterate through visitedOrder from target ending node
         for (int i = visitedOrder->rear; i > visitedOrder->front - 1; i--) {
             int currentNode = visitedOrder->list[i];
@@ -199,11 +197,8 @@ int* BFS(graph* graph, int startingPoint, int endingPoint) {
             if (currentNode == endingPoint)  {
                 //add the currentNode and parent node of that into shortest path
                 enqueue(shortestPath, currentNode);
-                //printf("Adding: %d\n", currentNode);
 
                 enqueue(shortestPath, graph->parentNode[currentNode]);
-                //printf("Adding: %d\n", graph->parentNode[currentNode]);
-
             }
             else {
                 //iterate through adjacent nodes of currentNode
@@ -212,20 +207,18 @@ int* BFS(graph* graph, int startingPoint, int endingPoint) {
                     for (int x = shortestPath->rear; x > shortestPath->front - 1; x--) {
                         //if parent node of current node is in shortest path list, add parent node OR
                         //if current node is part of shortest path, add parent node
-                        if (graph->parentNode[currentNode] == shortestPath->list[x] || currentNode == shortestPath->list[x]) {
+                        if (graph->parentNode[currentNode] == shortestPath->list[x] ||
+                        currentNode == shortestPath->list[x]) {
                             //if not already inside
                             if (graph->parentNode[currentNode] != shortestPath->list[x]) {
                                 //add parent node to shortest path
                                 enqueue(shortestPath, graph->parentNode[currentNode]);
-                                //printf("Adding: %d\n", graph->parentNode[currentNode]);
-
                             }
                             else {
                                 break;
                             }
                         }
                     }
-
                     //go to next adjacent node
                     graph->adjacentNodes[currentNode] = graph->adjacentNodes[currentNode]->next;
                 }
@@ -233,7 +226,6 @@ int* BFS(graph* graph, int startingPoint, int endingPoint) {
         }
 
         int* list = malloc((shortestPath->rear+1) * sizeof (int));
-
         //initialize list elements to -1
         for (int i = 0; i < shortestPath->rear + 1; i++) {
             list[i] = -1;
@@ -244,24 +236,24 @@ int* BFS(graph* graph, int startingPoint, int endingPoint) {
             printf("%d ", shortestPath->list[x]);
             list[shortestPath->rear - x] = shortestPath->list[x];
         }
-
         printf("\n");
         free(shortestPath);
+        free(nodesList);
+        free(visitedOrder);
 
         return list;
     }
     else {
-        printf("Destination node %d not found!", endingPoint);
+        printf("Destination node %d not found!\n\n", endingPoint);
     }
-
-    printf("\n \n");
-
     free(nodesList);
     free(visitedOrder);
 
     return NULL;
 }
+//END OF BFS
 
+//START OF DFS
 int found = 0;
 //Depth-first search
 void DFS(graph* graph, int vertex, int endingPoint, int startingPoint) {
@@ -329,7 +321,9 @@ void printDFS(graph* graph,int endingPoint,int startingPoint,queue* queue){
     printf("\n \n");
 
 }
+//END OF DFS
 
+//START OF DIJKSTRA
 int getDijkstraNodes(){
     return numberOfNodesTraversedInDijkstra;
 }
@@ -345,8 +339,6 @@ int dijkstraMinDistance(int shortestDistance[], bool shortestSpanTreeSet[], int 
     }
     return min_index;
 }
-
-
 
 // Function to print shortest path from source to j using parent array
 void printRouteOfShortestPath(int parent[], int j, int routeTaken[], int pos, int ROWS, int COLUMNS) {
@@ -451,6 +443,7 @@ int* dijkstraTraversal(graph* graph, int src, int dest, int ROWS, int COLUMNS) {
     return printDijkstraSolution(shortestDistance, parent, src, dest, ROWS, COLUMNS);
 
 }
+//END OF DIJKSTRA
 
 graph* createGraph(int rows,int columns){
     graph* result = malloc(sizeof(graph));
