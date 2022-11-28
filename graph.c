@@ -122,6 +122,15 @@ struct node* createNode(int n) {
 //START OF BFS
 //breadth-first search
 int* BFS(graph* graph, int startingPoint, int endingPoint) {
+    if (startingPoint < 0 || startingPoint > graph->numOfNodes) {
+        printf("Source node not found!\n");
+        return NULL;
+    }
+    if (endingPoint < 0 || endingPoint > graph->numOfNodes) {
+        printf("Destination node not found!\n");
+        return NULL;
+    }
+
     //create queue for all nodes
     struct queue* nodesList = createQueue();
     //create queue to store order to print at the end
@@ -189,8 +198,13 @@ int* BFS(graph* graph, int startingPoint, int endingPoint) {
         for (int i = visitedOrder->rear; i > visitedOrder->front - 1; i--) {
             int currentNode = visitedOrder->list[i];
 
+            if (startingPoint == endingPoint) {
+                enqueue(shortestPath, currentNode);
+                break;
+            }
+
             //if currentNode has reached the starting node, it should end
-            if (currentNode == startingPoint) {
+            if (startingPoint != endingPoint && currentNode == startingPoint) {
                 break;
             }
             //if currentNode is ending point
